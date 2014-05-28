@@ -7,31 +7,31 @@
     tools:context=".CoachActivity" >
 
     <TextView
-        android:id="@+id/TextView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stroke Rate: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/TextView04"
+        android:id="@+id/coxName2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="(Coxswain Name Here)"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/boatName2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="(Boat name Here)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/TextView02"
+        android:id="@+id/Meters2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meters: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/strokeRate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stroke Rate: "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView

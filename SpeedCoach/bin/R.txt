@@ -227,13 +227,10 @@ int drawable abc_textfield_searchview_holo_light 0x7f020054
 int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable ic_launcher 0x7f020057
+int id Meters2 0x7f05003e
 int id SelectCoach 0x7f050046
 int id SelectParent 0x7f050048
 int id SelectRower 0x7f050047
-int id TextView01 0x7f05003e
-int id TextView02 0x7f05003f
-int id TextView03 0x7f05003c
-int id TextView04 0x7f05003d
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b
@@ -250,10 +247,12 @@ int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id beginning 0x7f050011
 int id boatName1 0x7f050041
+int id boatName2 0x7f05003d
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id container 0x7f050044
 int id coxName1 0x7f050040
+int id coxName2 0x7f05003c
 int id default_activity_button 0x7f050028
 int id dialog 0x7f05000e
 int id disableHome 0x7f050008
@@ -293,6 +292,7 @@ int id showHome 0x7f050004
 int id showTitle 0x7f050006
 int id split_action_bar 0x7f05001e
 int id strokeRate1 0x7f050043
+int id strokeRate2 0x7f05003f
 int id submit_area 0x7f050039
 int id tabMode 0x7f050002
 int id textView1 0x7f050045
