@@ -1,8 +1,6 @@
 package com.lehmannsystems.speedcoach;
 
-import java.io.FileOutputStream;
-
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -15,27 +13,21 @@ import android.view.ViewGroup;
 public class MainActivity extends ActionBarActivity {
 
 	public void setPersonType (View v) {
-		String filename = "userPref";
-		String type = "";
-		FileOutputStream outputStream;
+		SharedPreferences settings = getSharedPreferences("userPref", MODE_PRIVATE);
+		SharedPreferences.Editor prefEditor = settings.edit();
+		prefEditor.putBoolean("setup", true);
 		switch (v.getId()) {
 			case (R.id.SelectCoach):
-				type="Coach";
+				prefEditor.putString("type", "Coach");
 			break;
 			case (R.id.SelectParent):
-				type="Parent";
+				prefEditor.putString("type", "Parent");
 			break;
 			case (R.id.SelectRower):
-				type="Rower";
+				prefEditor.putString("type", "Coxswain");
 			break;
 		}
-		try {
-			  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-			  outputStream.write(type.getBytes());
-			  outputStream.close();
-		} catch (Exception e) {
-			  e.printStackTrace();
-		}
+		prefEditor.commit();
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
