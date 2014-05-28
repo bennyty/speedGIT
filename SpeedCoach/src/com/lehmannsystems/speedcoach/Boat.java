@@ -21,6 +21,14 @@ public class Boat {
 		return connected;
 	}
 	
+	public void setSplit(double s) {
+		splitSeconds = s;
+	}
+	
+	public void setRate(int r) {
+		rate = r;
+	}
+	
 	public void reset() {
 		time = 0;
 		meters = 0;
