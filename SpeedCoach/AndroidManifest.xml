@@ -30,6 +30,12 @@
             android:name="com.lehmannsystems.speedcoach.CoachActivity"
             android:label="@string/title_activity_coach" >
         </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.RegattaViewFullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_regatta_view_fullscreen"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
     </application>
 
 </manifest>
