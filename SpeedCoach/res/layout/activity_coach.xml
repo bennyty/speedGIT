@@ -6,4 +6,60 @@
     android:orientation="vertical"
     tools:context=".CoachActivity" >
 
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stroke Rate: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Coxswain Name Here)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Boat name Here)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meters: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/coxName1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Coxswain Name Here)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/boatName1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Boat name Here)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/meters1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meters: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/strokeRate1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stroke Rate: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </LinearLayout>
