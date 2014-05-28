@@ -1,5 +1,7 @@
 package com.lehmannsystems.speedcoach;
 
+import android.annotation.SuppressLint;
+
 public class Boat {
 	String name;
 	String cox;
@@ -57,6 +59,17 @@ public class Boat {
 	}
 	
 	public String getFormattedSplit() {
-		return  ((int) getRawSplit()) / 60 + ":" + getRawSplit() % 60;
+		String result = "";
+		double split = getRawSplit();
+		int minutes = ((int) split) / 60;
+		int seconds = ((int) split) % 60;
+		double ms = (split - (int) split) * 10;
+		if (seconds > 9) {
+			result = minutes + ":" + seconds + "." + (int) ms;
+		}
+		else {
+			result = minutes + ":0" + seconds + "." + (int) ms;
+		}
+		return result;
 	}
 }
