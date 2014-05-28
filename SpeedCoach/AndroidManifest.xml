@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.CoxActivity"
+            android:label="@string/title_activity_cox" >
+        </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.CoachActivity"
+            android:label="@string/title_activity_coach" >
+        </activity>
     </application>
 
 </manifest>

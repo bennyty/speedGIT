@@ -1,72 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CoachActivity" >
+    tools:context="com.lehmannsystems.speedcoach.CoachActivity"
+    tools:ignore="MergeRootFrame" />
 
-    <TextView
-        android:id="@+id/coxName2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="(Coxswain Name Here)"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/boatName2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="(Boat name Here)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/Meters2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meters: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/strokeRate2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stroke Rate: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@drawable/abc_ab_share_pack_holo_light" />
-
-    <TextView
-        android:id="@+id/coxName1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="(Coxswain Name Here)"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/boatName1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="(Boat name Here)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/meters1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meters: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/strokeRate1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stroke Rate: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-</LinearLayout>
