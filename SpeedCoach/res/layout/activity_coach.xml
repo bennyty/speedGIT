@@ -34,6 +34,13 @@
         android:text="Stroke Rate: "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/abc_ab_share_pack_holo_light" />
+
     <TextView
         android:id="@+id/coxName1"
         android:layout_width="match_parent"
