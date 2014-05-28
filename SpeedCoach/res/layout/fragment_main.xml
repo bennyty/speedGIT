@@ -25,19 +25,19 @@
         android:text="Coach" />
 
     <Button
-        android:id="@+id/SelectRower"
+        android:id="@+id/SelectCoxswain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/SelectCoach"
         android:onClick="setPersonType"
-        android:text="Rower" />
+        android:text="Coxswain" />
 
     <Button
-        android:id="@+id/SelectParent"
+        android:id="@+id/SelectViewer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SelectRower"
+        android:layout_below="@+id/SelectCoxswain"
         android:onClick="setPersonType"
-        android:text="Parent" />
+        android:text="Regatta Viewer" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.lehmannsystems.speedcoach;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,15 +20,20 @@ public class MainActivity extends ActionBarActivity {
 		switch (v.getId()) {
 			case (R.id.SelectCoach):
 				prefEditor.putString("type", "Coach");
+				prefEditor.commit();
+				Intent intent = new Intent(this, CoachActivity.class);
+				startActivity(intent);
 			break;
-			case (R.id.SelectParent):
-				prefEditor.putString("type", "Parent");
+			case (R.id.SelectViewer):
+				prefEditor.putString("type", "Regatta Viewer");
+				prefEditor.commit();
 			break;
-			case (R.id.SelectRower):
+			case (R.id.SelectCoxswain):
 				prefEditor.putString("type", "Coxswain");
+				prefEditor.commit();
 			break;
 		}
-		prefEditor.commit();
+		
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
