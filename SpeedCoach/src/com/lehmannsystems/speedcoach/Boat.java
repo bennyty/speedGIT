@@ -7,6 +7,7 @@ public class Boat {
 	double splitSeconds;
 	int time;
 	int meters;
+	static int NEWCOMMIT;
 	
 	public Boat (String n, String c){
 		name = n;
