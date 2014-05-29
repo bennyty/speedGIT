@@ -36,9 +36,9 @@ public class MainActivity extends ActionBarActivity {
 	    if(!previouslyStarted){
 		    intent = new Intent(this, WhoAreYouActivity.class);
 		    startActivity(intent);
-		    Log.d(getLocalClassName(), "This has Not been previously started");
+		    //Log.d(getLocalClassName(), "This has Not been previously started");
 	    } else {
-	    	Log.d(getLocalClassName(), "This has been previously started");
+	    	//Log.d(getLocalClassName(), "This has been previously started");
 	    	switch (prefs.getInt("type", 0)) {
 		    	//0 - Coach
 				//1 - Cox
