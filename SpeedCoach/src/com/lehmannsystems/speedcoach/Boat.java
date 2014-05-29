@@ -1,7 +1,5 @@
 package com.lehmannsystems.speedcoach;
 
-import android.annotation.SuppressLint;
-
 public class Boat {
 	String name;
 	String cox;
@@ -9,11 +7,19 @@ public class Boat {
 	double splitSeconds;
 	int time;
 	int meters;
+	String regatta;
 	
 	public Boat (String n, String c){
 		name = n;
 		cox = c;
 		time = 0;
+	}
+	
+	public Boat (String n, String c, String r){
+		name = n;
+		cox = c;
+		time = 0;
+		regatta = r;
 	}
 	
 	public boolean update() {
