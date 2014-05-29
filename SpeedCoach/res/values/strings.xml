@@ -14,6 +14,7 @@
 	<string name="split_Label">Split:</string>
 	<string name="rate_Label">Rate:</string>
 	<string name="start_Label">Start</string>
+	<string name="meters_Label">Meters Rowed:</string>
 	<string name="avg_split_Label">Avg. Split</string>
 	<string name="who_are_you_Label">You Are A:</string>
 	
