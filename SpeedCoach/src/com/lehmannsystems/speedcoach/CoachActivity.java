@@ -25,25 +25,25 @@ public class CoachActivity extends ActionBarActivity {
 		while (on) {
 			boatA.update();
 			boatB.update();
-			TextView display = (TextView) findViewById(R.id.cox01);
+			TextView display = (TextView) findViewById(R.id.coxA);
 			display.setText(boatA.getCox());
-			display = (TextView) findViewById(R.id.cox02);
+			display = (TextView) findViewById(R.id.coxB);
 			display.setText(boatB.getCox());
-			display = (TextView) findViewById(R.id.split01);
+			display = (TextView) findViewById(R.id.splitA);
 			display.setText(boatA.formatSplit(boatA.getRawSplit()));
-			display = (TextView) findViewById(R.id.split02);
+			display = (TextView) findViewById(R.id.splitB);
 			display.setText(boatB.formatSplit(boatB.getRawSplit()));
-			display = (TextView) findViewById(R.id.meters01);
+			display = (TextView) findViewById(R.id.metersA);
 			display.setText(boatA.getMeters());
-			display = (TextView) findViewById(R.id.meters02);
+			display = (TextView) findViewById(R.id.metersB);
 			display.setText(boatB.getMeters());
-			display = (TextView) findViewById(R.id.rate01);
+			display = (TextView) findViewById(R.id.rateA);
 			display.setText(boatA.getRate());
-			display = (TextView) findViewById(R.id.rate02);
+			display = (TextView) findViewById(R.id.rateB);
 			display.setText(boatB.getRate());
-			display = (TextView) findViewById(R.id.avgSplit01);
+			display = (TextView) findViewById(R.id.avgSplitA);
 			display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
-			display = (TextView) findViewById(R.id.avgSplit02);
+			display = (TextView) findViewById(R.id.avgSplitB);
 			display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
 		}
 		boatA.reset();

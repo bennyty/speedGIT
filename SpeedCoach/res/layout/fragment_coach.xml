@@ -17,7 +17,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button01"
+            android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
@@ -25,7 +25,7 @@
             android:text="@string/start" />
 
         <TextView
-            android:id="@+id/splitLabel01"
+            android:id="@+id/splitLabelC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -33,7 +33,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/metersLabel01"
+            android:id="@+id/metersLabelC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -41,7 +41,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/rateLabel01"
+            android:id="@+id/rateLabelC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -49,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/avgSplitLabel01"
+            android:id="@+id/avgSplitLabelC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -58,7 +58,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/totalTime01"
+        android:id="@+id/totalTimeC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -78,34 +78,34 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/cox02"
+            android:id="@+id/coxB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/split02"
+            android:id="@+id/splitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/meters02"
+            android:id="@+id/metersB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/rate02"
+            android:id="@+id/rateB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/avgSplit02"
+            android:id="@+id/avgSplitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -116,40 +116,40 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/totalTime01"
+        android:layout_below="@+id/totalTimeC"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/cox01"
+            android:id="@+id/coxA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/split01"
+            android:id="@+id/splitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/meters01"
+            android:id="@+id/metersA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/rate01"
+            android:id="@+id/rateA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/avgSplit01"
+            android:id="@+id/avgSplitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
