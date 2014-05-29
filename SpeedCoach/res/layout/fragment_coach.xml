@@ -22,14 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
             android:onClick="toggle()"
-            android:text="@string/start" />
+            android:text="@string/start_Label" />
 
         <TextView
             android:id="@+id/splitLabelC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/split"
+            android:text="@string/split_Label"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/meters"
+            android:text="@string/meters_Label"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/rate"
+            android:text="@string/rate_Label"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/avgSplit"
+            android:text="@string/avg_split_Label"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
@@ -65,7 +65,7 @@
         android:layout_alignTop="@+id/linearLayout1"
         android:layout_marginRight="41dp"
         android:layout_marginTop="14dp"
-        android:text="@string/total_time"
+        android:text="@string/tot_time_Label"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
