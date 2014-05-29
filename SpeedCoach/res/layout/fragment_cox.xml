@@ -9,7 +9,7 @@
     tools:context="com.lehmannsystems.speedcoach.CoxActivity$PlaceholderFragment" >
 
     <TextView
-        android:id="@+id/metersLabel"
+        android:id="@+id/metersLabel01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
@@ -18,8 +18,8 @@
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/metersLabel"
+        android:layout_below="@+id/metersLabel01"
         android:layout_marginTop="113dp"
-        android:layout_toRightOf="@+id/metersLabel" />
+        android:layout_toRightOf="@+id/metersLabel01" />
 
 </RelativeLayout>
