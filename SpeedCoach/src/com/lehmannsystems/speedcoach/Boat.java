@@ -13,6 +13,7 @@ public class Boat {
 		name = n;
 		cox = c;
 		time = 0;
+		regatta = null;
 	}
 	
 	public Boat (String n, String c, String r){
@@ -22,11 +23,10 @@ public class Boat {
 		regatta = r;
 	}
 	
-	public boolean update() {
+	public void update() {
 		boolean connected = false;
 		//connect to database and update rate and splitSeconds
 		time++; //assumes this method is called once per second, if not will need to be altered
-		return connected;
 	}
 	
 	public void setSplit(double s) {
@@ -60,13 +60,16 @@ public class Boat {
 		return splitSeconds;
 	}
 	
+	public double getRawAvgSplit() {
+		return 0.0;
+	}
+	
 	public int getMeters() {
 		return meters;
 	}
 	
-	public String getFormattedSplit() {
+	public String formatSplit(double split) {
 		String result = "";
-		double split = getRawSplit();
 		int minutes = ((int) split) / 60;
 		int seconds = ((int) split) % 60;
 		double ms = (split - (int) split) * 10;
