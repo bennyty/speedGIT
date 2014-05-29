@@ -1,6 +1,5 @@
 package com.lehmannsystems.speedcoach;
 
-import com.lehmannsystems.speedcoach.MainActivity.PlaceholderFragment;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
