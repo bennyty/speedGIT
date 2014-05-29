@@ -9,5 +9,13 @@
     <string name="title_activity_regatta_view_fullscreen">RegattaViewFullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
+    <string name="cox">Coxswain</string>
+	<string name="split">Split</string>
+	<string name="meters">Meters</string>
+	<string name="rate">Rate</string>
+	<string name="avgSplit">Avg. Split</string>
+	<string name="start">Start</string>
+	<string name="stop">Stop</string>
+	<string name="total_time">Elapsed Time</string>
+	
 </resources>
