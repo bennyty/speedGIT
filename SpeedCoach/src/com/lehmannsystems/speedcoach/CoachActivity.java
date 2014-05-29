@@ -1,6 +1,5 @@
 package com.lehmannsystems.speedcoach;
 
-
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,47 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.os.Build;
 
 public class CoachActivity extends ActionBarActivity {
 
-	Boat boatA = new Boat("Testrel A", "Atlas");
-	Boat boatB = new Boat("Testrel B", "P-Body");
-	boolean on = false;
-	
-	public void act () {
-		while (on) {
-			boatA.update();
-			boatB.update();
-			TextView display = (TextView) findViewById(R.id.cox01);
-			display.setText(boatA.getCox());
-			display = (TextView) findViewById(R.id.cox02);
-			display.setText(boatB.getCox());
-			display = (TextView) findViewById(R.id.split01);
-			display.setText(boatA.formatSplit(boatA.getRawSplit()));
-			display = (TextView) findViewById(R.id.split02);
-			display.setText(boatB.formatSplit(boatB.getRawSplit()));
-			display = (TextView) findViewById(R.id.meters01);
-			display.setText(boatA.getMeters());
-			display = (TextView) findViewById(R.id.meters02);
-			display.setText(boatB.getMeters());
-			display = (TextView) findViewById(R.id.rate01);
-			display.setText(boatA.getRate());
-			display = (TextView) findViewById(R.id.rate02);
-			display.setText(boatB.getRate());
-			display = (TextView) findViewById(R.id.avgSplit01);
-			display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
-			display = (TextView) findViewById(R.id.avgSplit02);
-			display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
-		}
-		boatA.reset();
-		boatB.reset();
+	public void act (View v) {
+		//if (v.getId())
 	}
-	
-	public void toggle() {
-		on = !on;
-	} 
+		
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +35,7 @@ public class CoachActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.coach, menu);
 		return true;
 	}
 
@@ -96,8 +62,8 @@ public class CoachActivity extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_coach, container,
-					false);
+			View rootView = inflater.inflate(R.layout.fragment_coach,
+					container, false);
 			return rootView;
 		}
 	}

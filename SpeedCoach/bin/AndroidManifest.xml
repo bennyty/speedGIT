@@ -36,6 +36,10 @@
             android:label="@string/title_activity_regatta_view_fullscreen"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.WhoAreYouActivity"
+            android:label="@string/title_activity_who_are_you" >
+        </activity>
     </application>
 
 </manifest>

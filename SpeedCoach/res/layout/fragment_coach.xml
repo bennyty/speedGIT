@@ -1,158 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CoachActivity" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/button01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:onClick="toggle()"
-            android:text="@string/start" />
-
-        <TextView
-            android:id="@+id/splitLabel01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/split"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/metersLabel01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/meters"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/rateLabel01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/rate"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/avgSplitLabel01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/avgSplit"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/totalTime01"
-        android:layout_width="wrap_content"
+        android:id="@+id/coxName2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/linearLayout1"
-        android:layout_marginRight="41dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/total_time"
+        android:text="(Coxswain Name Here)"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <TextView
+        android:id="@+id/boatName2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Boat name Here)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/Meters2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linearLayout2"
-        android:layout_marginLeft="35dp"
-        android:layout_toRightOf="@+id/linearLayout2"
-        android:orientation="vertical" >
+        android:text="Meters: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/cox02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/split02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/meters02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/rate02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/avgSplit02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <TextView
+        android:id="@+id/strokeRate2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/totalTime01"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
-        android:orientation="vertical" >
+        android:text="Stroke Rate: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/cox01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/abc_ab_share_pack_holo_light" />
 
-        <TextView
-            android:id="@+id/split01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/coxName1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Coxswain Name Here)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/meters01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/boatName1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Boat name Here)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/rate01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/meters1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meters: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/avgSplit01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView" />
-        </LinearLayout>
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/strokeRate1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stroke Rate: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>
