@@ -13,31 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="You Are A:"
+        android:layout_centerVertical="true"
+        android:text="MainActivity You should never see this"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/SelectCoach"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:onClick="setPersonType"
-        android:text="Coach" />
-
-    <Button
-        android:id="@+id/SelectCoxswain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SelectCoach"
-        android:onClick="setPersonType"
-        android:text="Coxswain" />
-
-    <Button
-        android:id="@+id/SelectViewer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SelectCoxswain"
-        android:onClick="setPersonType"
-        android:text="Regatta Viewer" />
 
 </RelativeLayout>
