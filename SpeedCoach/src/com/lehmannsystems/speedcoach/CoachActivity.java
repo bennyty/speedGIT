@@ -17,8 +17,8 @@ import android.os.Build;
 
 public class CoachActivity extends ActionBarActivity {
 
-	Boat boatA = new Boat("Testrel A", "Atlas", "Smokey Jacobs", 34, 100.5, 60, 700);
-	Boat boatB = new Boat("Testrel B", "P-Body", "Smokey Jacobs", 48, 112.3, 60, 700);
+	Boat boatA = new Boat("Testrel A", "Atlas");
+	Boat boatB = new Boat("Testrel B", "P-Body");
 	boolean on = false;
 	
 	public void act () {
@@ -45,8 +45,6 @@ public class CoachActivity extends ActionBarActivity {
 			display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
 			display = (TextView) findViewById(R.id.avgSplitB);
 			display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
-			display = (TextView) findViewById(R.id.totalTimeC);
-			display.setText(boatA.formatSplit((double) (boatA.getRawTime())));
 		}
 		boatA.reset();
 		boatB.reset();
@@ -71,7 +69,7 @@ public class CoachActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.coach, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
