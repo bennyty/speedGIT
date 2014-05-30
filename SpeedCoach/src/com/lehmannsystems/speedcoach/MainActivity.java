@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -85,6 +86,12 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/*Not used (static references are too hard)
+	public void toastMe(String msg) {
+		Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+    	toast.show();
+	}*/
+	
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */

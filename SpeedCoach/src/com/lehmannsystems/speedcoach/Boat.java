@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.widget.Toast;
+
 public class Boat {
 	String name;
 	String cox;
@@ -49,12 +54,28 @@ public class Boat {
 		String inputLine;
 
 		try {
-			//while ((inputLine = in.readLine()) != null) {
-				inputLine = in.readLine();
-			    System.out.println(inputLine);
-			    //Need parsing here
-			    
-			//}
+			inputLine = in.readLine();
+		    //System.out.println(inputLine);
+		    //System.out.println(inputLine.substring(1, inputLine.length()-1));
+		    //Need parsing here
+		    JSONObject json = new JSONObject(inputLine.substring(1, inputLine.length()-1));
+		    /*
+		    System.out.println(json.length());
+		    System.out.println(json.getInt("id"));
+		    System.out.println(json.getString("cox"));
+		    System.out.println(json.getInt("team_id"));
+		    System.out.println(json.getString("time_stamp"));
+		    System.out.println(json.getInt("meters"));
+		    System.out.println(json.getDouble("mtpersec"));
+		    System.out.println(json.getInt("rate"));
+		    */
+		    if (cox == json.getString("cox") || teamId == json.getInt("team_id")) {
+		    	rate = json.getInt("rate");
+		    	meters = json.getInt("meters");
+		    	splitSeconds = 500 / json.getDouble("mtpersec");
+		    } else {
+		    	System.out.println("Cox or teamId mismatch");
+		    }
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
