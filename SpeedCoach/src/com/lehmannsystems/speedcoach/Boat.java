@@ -49,10 +49,12 @@ public class Boat {
 		String inputLine;
 
 		try {
-			while ((inputLine = in.readLine()) != null) {
+			//while ((inputLine = in.readLine()) != null) {
+				inputLine = in.readLine();
 			    System.out.println(inputLine);
 			    //Need parsing here
-			}
+			    
+			//}
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
