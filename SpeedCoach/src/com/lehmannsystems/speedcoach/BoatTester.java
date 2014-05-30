@@ -11,13 +11,7 @@ public class BoatTester {
 					", is rowing a " + entheos.formatSplit(entheos.getRawSplit()) + " (" + entheos.getRawSplit() + 
 					" raw seconds) at a " + entheos.getRate());
 			System.out.println(testString);
-			Boat four = new Boat("1st Four", "Charlie", 1);
-			four.setRate(45);
-			four.setSplit(111.4);
-			testString = ("The " + four.getName() + ", coxed by " + four.getCox() + 
-					", is rowing a " + four.formatSplit(four.getRawSplit()) + " (" + four.getRawSplit() + 
-					" raw seconds) at a " + four.getRate());
-			System.out.println(testString);
+			
 		}
 
 	}

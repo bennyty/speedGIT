@@ -9,14 +9,16 @@ import java.net.URL;
 import org.json.JSONObject;
 
 public class Boat {
-	String name;
-	String cox;
-	int teamId;
-	int rate;
-	double splitSeconds;
-	int time;
-	int meters;
-	String regatta;
+	private String name;
+	private String cox;
+	private int teamId;
+	private int rate;
+	private double splitSeconds;
+	private int time;
+	private int meters;
+	private String regatta;
+	private int avgCount;
+	private double avgTotalSplit;
 	
 	public Boat (String n, String c, int i){
 		name = n;
@@ -52,24 +54,13 @@ public class Boat {
 
 		try {
 			inputLine = in.readLine();
-		    //System.out.println(inputLine);
-		    //System.out.println(inputLine.substring(1, inputLine.length()-1));
-		    //Need parsing here
 		    JSONObject json = new JSONObject(inputLine.substring(1, inputLine.length()-1));
-		    /*
-		    System.out.println(json.length());
-		    System.out.println(json.getInt("id"));
-		    System.out.println(json.getString("cox"));
-		    System.out.println(json.getInt("team_id"));
-		    System.out.println(json.getString("time_stamp"));
-		    System.out.println(json.getInt("meters"));
-		    System.out.println(json.getDouble("mtpersec"));
-		    System.out.println(json.getInt("rate"));
-		    */
+
 		    if (cox == json.getString("cox") || teamId == json.getInt("team_id")) {
 		    	rate = json.getInt("rate");
 		    	meters = json.getInt("meters");
 		    	splitSeconds = 500 / json.getDouble("mtpersec");
+		    	avgTotalSplit += splitSeconds;
 		    } else {
 		    	System.out.println("Cox or teamId mismatch");
 		    }
@@ -77,7 +68,7 @@ public class Boat {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		avgCount++;
 		time++; //assumes this method is called once per second, if not will need to be altered
 	}
 	
@@ -92,6 +83,8 @@ public class Boat {
 	public void reset() {
 		time = 0;
 		meters = 0;
+		avgCount = 0;
+		time = 0;
 	}
 	
 	public String getName() {
@@ -113,7 +106,8 @@ public class Boat {
 	}
 	
 	public double getRawAvgSplit() {
-		return 0.0;
+		double a = avgTotalSplit/avgCount;
+		return a;
 	}
 	
 	public int getMeters() {
