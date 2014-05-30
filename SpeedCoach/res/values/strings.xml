@@ -22,6 +22,8 @@
 	<string name="coach_Label">Coach</string>
 	<string name="coxswain_Label">Coxswain</string>
 	<string name="viewer_Label">Regatta Viewer</string>
+	<string name="select">Press\nMenu</string>
+	<string name="no_boat">Select\nBoat</string>
 	
 	
 	
