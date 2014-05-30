@@ -81,35 +81,35 @@
             android:id="@+id/coxB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dummy_content" />
+            android:text="@string/select" />
 
         <TextView
             android:id="@+id/splitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/metersB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/rateB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/avgSplitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
     </LinearLayout>
 
     <LinearLayout
@@ -125,34 +125,34 @@
             android:id="@+id/coxA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dummy_content" />
+            android:text="@string/select" />
 
         <TextView
             android:id="@+id/splitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/metersA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/rateA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
 
         <TextView
             android:id="@+id/avgSplitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/dummy_content" />
+            android:text="@string/no_boat" />
         </LinearLayout>
     </RelativeLayout>
