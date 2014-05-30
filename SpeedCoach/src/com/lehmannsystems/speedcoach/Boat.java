@@ -1,31 +1,63 @@
 package com.lehmannsystems.speedcoach;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class Boat {
 	String name;
 	String cox;
+	int teamId;
 	int rate;
 	double splitSeconds;
 	int time;
 	int meters;
 	String regatta;
 	
-	public Boat (String n, String c){
+	public Boat (String n, String c, int i){
 		name = n;
 		cox = c;
+		teamId = i;
 		time = 0;
 		regatta = null;
 	}
 	
-	public Boat (String n, String c, String r){
+	public Boat (String n, String c, int i, String r){
 		name = n;
 		cox = c;
+		teamId = i;
 		time = 0;
 		regatta = r;
 	}
 	
-	public void update() {
-		boolean connected = false;
+	public void update(String coxName, int teamID)  {
+		
 		//connect to database and update rate and splitSeconds
+		URL db = null;
+		BufferedReader in = null;
+		
+		try {
+			db = new URL("http://getgreenrain.com/RowSplit/retrieveLatestSplit.php?cox=" + coxName + "&team=" + String.valueOf(teamID));
+			in = new BufferedReader(new InputStreamReader(db.openStream()));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String inputLine;
+
+		try {
+			while ((inputLine = in.readLine()) != null) {
+			    System.out.println(inputLine);
+			    //Need parsing here
+			}
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		time++; //assumes this method is called once per second, if not will need to be altered
 	}
 	
@@ -51,12 +83,12 @@ public class Boat {
 	}
 	
 	public int getRate() {
-		update();
+		update(cox, teamId);
 		return rate;
 	}
 	
 	public double getRawSplit() {
-		update();
+		update(cox, teamId);
 		return splitSeconds;
 	}
 	

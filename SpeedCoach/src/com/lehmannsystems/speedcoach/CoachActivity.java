@@ -17,14 +17,14 @@ import android.os.Build;
 
 public class CoachActivity extends ActionBarActivity {
 
-	Boat boatA = new Boat("Testrel A", "Atlas");
-	Boat boatB = new Boat("Testrel B", "P-Body");
+	Boat boatA = new Boat("Testrel A", "Atlas", 1);
+	Boat boatB = new Boat("Testrel B", "P-Body", 1);
 	boolean on = false;
 	
 	public void act () {
 		while (on) {
-			boatA.update();
-			boatB.update();
+			boatA.update(boatA.cox, boatA.teamId);
+			boatB.update(boatB.cox, boatB.teamId);
 			TextView display = (TextView) findViewById(R.id.coxA);
 			display.setText(boatA.getCox());
 			display = (TextView) findViewById(R.id.coxB);
