@@ -9,6 +9,7 @@ public class Boat {
 	int meters;
 	String regatta;
 	
+	//constructor for non-regatta situations
 	public Boat (String n, String c){
 		name = n;
 		cox = c;
@@ -16,11 +17,23 @@ public class Boat {
 		regatta = null;
 	}
 	
+	//constructor for regattas
 	public Boat (String n, String c, String r){
 		name = n;
 		cox = c;
 		time = 0;
 		regatta = r;
+	}
+	
+	//constructor for testing purposes
+	public Boat (String n, String c, String r, int rt, double s, int t, int m){
+		name = n;
+		cox = c;
+		time = t;
+		regatta = r;
+		rate = rt;
+		splitSeconds = s;
+		meters = m;
 	}
 	
 	public void update() {
@@ -61,11 +74,16 @@ public class Boat {
 	}
 	
 	public double getRawAvgSplit() {
+		//requires database retrieval
 		return 0.0;
 	}
 	
 	public int getMeters() {
 		return meters;
+	}
+	
+	public int getRawTime() {
+		return time;
 	}
 	
 	public String formatSplit(double split) {
