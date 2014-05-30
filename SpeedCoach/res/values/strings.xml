@@ -25,5 +25,8 @@
 	<string name="select">Press\nMenu</string>
 	<string name="no_boat">Select\nBoat</string>
 	
+	<string name="add_slot_a">Set Boat A</string>
+	<string name="add_slot_b">Set Boat B</string>
+	
 	
 </resources>

@@ -4,8 +4,18 @@
     tools:context="com.lehmannsystems.speedcoach.CoachActivity" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/add_slot_a"
         android:orderInCategory="100"
+        android:title="@string/add_slot_a"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/add_slot_b"
+        android:orderInCategory="200"
+        android:title="@string/add_slot_b"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="300"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 

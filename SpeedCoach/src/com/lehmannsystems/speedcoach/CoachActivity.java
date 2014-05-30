@@ -15,39 +15,52 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.os.Build;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class CoachActivity extends ActionBarActivity {
 
-	Boat boatA = new Boat("Testrel A", "Atlas", 1);
-	Boat boatB = new Boat("Testrel B", "P-Body", 1);
+	Boat boatA = new Boat("Entheos", "Mike", 1);
+	Boat boatB = new Boat("First Four", "Mike", 1);
 	boolean on = false;
 	
 	public void act () {
-		while (on) {
-			boatA.update(boatA.cox, boatA.teamId);
-			boatB.update(boatB.cox, boatB.teamId);
-			TextView display = (TextView) findViewById(R.id.coxA);
-			display.setText(boatA.getCox());
-			display = (TextView) findViewById(R.id.coxB);
-			display.setText(boatB.getCox());
-			display = (TextView) findViewById(R.id.splitA);
-			display.setText(boatA.formatSplit(boatA.getRawSplit()));
-			display = (TextView) findViewById(R.id.splitB);
-			display.setText(boatB.formatSplit(boatB.getRawSplit()));
-			display = (TextView) findViewById(R.id.metersA);
-			display.setText(boatA.getMeters());
-			display = (TextView) findViewById(R.id.metersB);
-			display.setText(boatB.getMeters());
-			display = (TextView) findViewById(R.id.rateA);
-			display.setText(boatA.getRate());
-			display = (TextView) findViewById(R.id.rateB);
-			display.setText(boatB.getRate());
-			display = (TextView) findViewById(R.id.avgSplitA);
-			display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
-			display = (TextView) findViewById(R.id.avgSplitB);
-			display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
-		}
-		boatA.reset();
-		boatB.reset();
+		Runnable helloRunnable = new Runnable() {
+		    public void run() {
+		    	if (on) {
+					boatA.update(boatA.cox, boatA.teamId);
+					boatB.update(boatB.cox, boatB.teamId);
+					TextView display = (TextView) findViewById(R.id.coxA);
+					display.setText(boatA.getCox());
+					display = (TextView) findViewById(R.id.coxB);
+					display.setText(boatB.getCox());
+					display = (TextView) findViewById(R.id.splitA);
+					display.setText(boatA.formatSplit(boatA.getRawSplit()));
+					display = (TextView) findViewById(R.id.splitB);
+					display.setText(boatB.formatSplit(boatB.getRawSplit()));
+					display = (TextView) findViewById(R.id.metersA);
+					display.setText(boatA.getMeters());
+					display = (TextView) findViewById(R.id.metersB);
+					display.setText(boatB.getMeters());
+					display = (TextView) findViewById(R.id.rateA);
+					display.setText(boatA.getRate());
+					display = (TextView) findViewById(R.id.rateB);
+					display.setText(boatB.getRate());
+					display = (TextView) findViewById(R.id.avgSplitA);
+					display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
+					display = (TextView) findViewById(R.id.avgSplitB);
+					display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
+					display = (TextView) findViewById(R.id.totalTimeC);
+					display.setText(boatA.formatSplit((double) (boatA.time)));
+					
+					boatA.reset();
+					boatB.reset();
+				}
+		    }
+		};
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+		executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
 	}
 	
 	public void toggle() {
@@ -63,13 +76,14 @@ public class CoachActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		act();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.coach, menu);
 		return true;
 	}
 
@@ -78,13 +92,20 @@ public class CoachActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+	        case R.id.add_slot_a:
+	            addBoatA();
+	            return true;
+	        case R.id.add_slot_b:
+	            addBoatB();
+	            return true;
+	        case R.id.action_settings:
+	            //openSettings();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
-
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
@@ -102,4 +123,13 @@ public class CoachActivity extends ActionBarActivity {
 		}
 	}
 
+	private void addBoatA() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addBoatB() {
+		// TODO Auto-generated method stub
+		
+	}
 }
