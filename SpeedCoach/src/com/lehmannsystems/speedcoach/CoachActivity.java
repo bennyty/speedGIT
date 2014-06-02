@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,16 +27,54 @@ public class CoachActivity extends ActionBarActivity {
 	Boat boatA = new Boat("Entheos", "Mike", 1);
 	Boat boatB = new Boat("First Four", "Mike", 1);
 	boolean on = false;
+	boolean go = false;
+	final Runnable updateRunnable = new Runnable() {
+		   public void run() {
+				boatA.update(boatA.getCox(), boatA.getTeamId());
+				boatB.update(boatB.getCox(), boatB.getTeamId());
+				TextView display = (TextView) findViewById(R.id.coxA);
+				display.setText(boatA.getCox());
+				display = (TextView) findViewById(R.id.coxB);
+				display.setText(boatB.getCox());
+				display = (TextView) findViewById(R.id.splitA);
+				display.setText(boatA.formatSplit(boatA.getRawSplit()));
+				display = (TextView) findViewById(R.id.splitB);
+				display.setText(boatB.formatSplit(boatB.getRawSplit()));
+				display = (TextView) findViewById(R.id.metersA);
+				display.setText(boatA.getMeters());
+				display = (TextView) findViewById(R.id.metersB);
+				display.setText(boatB.getMeters());
+				display = (TextView) findViewById(R.id.rateA);
+				display.setText(boatA.getRate());
+				display = (TextView) findViewById(R.id.rateB);
+				display.setText(boatB.getRate());
+				display = (TextView) findViewById(R.id.avgSplitA);
+				display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
+				display = (TextView) findViewById(R.id.avgSplitB);
+				display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
+				display = (TextView) findViewById(R.id.totalTimeC);
+				display.setText(boatA.formatSplit((double) (boatA.getRawTime())));
+		   }
+		};
+	Thread updateThread = new Thread(updateRunnable);
 	
 	public void act () {
-		Timer timer = new Timer();
-		timer.schedule(new Render(), 0, 1000);
+		Timer myTimer = new Timer();
+	      myTimer.schedule(new TimerTask() {
+	         @Override
+	         public void run() {UpdateGUI();}
+	      }, 0, 1000);
+	}
+	
+	public void UpdateGUI() {
+		updateThread.start();
 	}
 	
 	public void toggle(View v) {
 		on = !on;
 		TextView display = (TextView) findViewById(R.id.buttonC);
 		display.setText("Toggle!");
+		act();
 	} 
 	
 	@Override
@@ -47,7 +86,6 @@ public class CoachActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		act();
 	}
 
 	@Override
@@ -93,7 +131,7 @@ public class CoachActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
-
+	
 	private void addBoatA() {
 		// TODO Auto-generated method stub
 		
@@ -102,40 +140,5 @@ public class CoachActivity extends ActionBarActivity {
 	private void addBoatB() {
 		// TODO Auto-generated method stub
 		
-	}
-	class Render extends TimerTask {
-	    public void run() {
-	    	TextView display;
-	    	if (on) {
-				boatA.update(boatA.cox, boatA.teamId);
-				boatB.update(boatB.cox, boatB.teamId);
-				display = (TextView) findViewById(R.id.coxA);
-				display.setText(boatA.getCox());
-				display = (TextView) findViewById(R.id.coxB);
-				display.setText(boatB.getCox());
-				display = (TextView) findViewById(R.id.splitA);
-				display.setText(boatA.formatSplit(boatA.getRawSplit()));
-				display = (TextView) findViewById(R.id.splitB);
-				display.setText(boatB.formatSplit(boatB.getRawSplit()));
-				display = (TextView) findViewById(R.id.metersA);
-				display.setText(boatA.getMeters());
-				display = (TextView) findViewById(R.id.metersB);
-				display.setText(boatB.getMeters());
-				display = (TextView) findViewById(R.id.rateA);
-				display.setText(boatA.getRate());
-				display = (TextView) findViewById(R.id.rateB);
-				display.setText(boatB.getRate());
-				display = (TextView) findViewById(R.id.avgSplitA);
-				display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
-				display = (TextView) findViewById(R.id.avgSplitB);
-				display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
-				display = (TextView) findViewById(R.id.totalTimeC);
-				display.setText(boatA.formatSplit((double) (boatA.time)));
-	    	}
-			else {
-				boatA.reset();
-				boatB.reset();
-			}
-	    }
 	}
 }

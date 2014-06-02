@@ -127,4 +127,11 @@ public class Boat {
 		}
 		return result;
 	}
+	public int getTeamId() {
+		return teamId;
+	}
+	
+	public int getRawTime() {
+		return time;
+	}
 }
