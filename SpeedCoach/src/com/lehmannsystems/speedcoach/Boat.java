@@ -12,7 +12,7 @@ public class Boat {
 	private String name;
 	private String cox;
 	private int teamId;
-	private int rate;
+	private double rate;
 	private double splitSeconds;
 	private int time;
 	private int meters;
@@ -57,12 +57,15 @@ public class Boat {
 		    JSONObject json = new JSONObject(inputLine.substring(1, inputLine.length()-1));
 
 		    if (cox == json.getString("cox") || teamId == json.getInt("team_id")) {
-		    	rate = json.getInt("rate");
+		    	rate = json.getDouble("rate");
 		    	meters = json.getInt("meters");
 		    	splitSeconds = 500 / json.getDouble("mtpersec");
 		    	avgTotalSplit += splitSeconds;
 		    } else {
-		    	System.out.println("Cox or teamId mismatch");
+		    	rate = -1;
+		    	meters = -1;
+		    	splitSeconds = -1;
+		    	avgTotalSplit += -1;
 		    }
 			in.close();
 		} catch (IOException e) {
@@ -95,7 +98,7 @@ public class Boat {
 		return cox;
 	}
 	
-	public int getRate() {
+	public double getRate() {
 		update(cox, teamId);
 		return rate;
 	}

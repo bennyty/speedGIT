@@ -25,49 +25,77 @@ import java.util.concurrent.TimeUnit;
 public class CoachActivity extends ActionBarActivity {
 
 	Boat boatA = new Boat("Entheos", "Mike", 1);
-	Boat boatB = new Boat("First Four", "Mike", 1);
+	Boat boatB = new Boat("First Four", "Derp", 1);
+	String coxA;
+	String coxB;
+	String splitA;
+	String splitB;
+	int metersA;
+	int metersB;
+	double rateA;
+	double rateB;
+	String avgSplitA;
+	String avgSplitB;
+	String totalTime;
 	boolean on = false;
 	boolean go = false;
 	final Runnable updateRunnable = new Runnable() {
 		   public void run() {
-				boatA.update(boatA.getCox(), boatA.getTeamId());
-				boatB.update(boatB.getCox(), boatB.getTeamId());
-				TextView display = (TextView) findViewById(R.id.coxA);
-				display.setText(boatA.getCox());
-				display = (TextView) findViewById(R.id.coxB);
-				display.setText(boatB.getCox());
-				display = (TextView) findViewById(R.id.splitA);
-				display.setText(boatA.formatSplit(boatA.getRawSplit()));
-				display = (TextView) findViewById(R.id.splitB);
-				display.setText(boatB.formatSplit(boatB.getRawSplit()));
-				display = (TextView) findViewById(R.id.metersA);
-				display.setText(boatA.getMeters());
-				display = (TextView) findViewById(R.id.metersB);
-				display.setText(boatB.getMeters());
-				display = (TextView) findViewById(R.id.rateA);
-				display.setText(boatA.getRate());
-				display = (TextView) findViewById(R.id.rateB);
-				display.setText(boatB.getRate());
-				display = (TextView) findViewById(R.id.avgSplitA);
-				display.setText(boatA.formatSplit(boatA.getRawAvgSplit()));
-				display = (TextView) findViewById(R.id.avgSplitB);
-				display.setText(boatB.formatSplit(boatA.getRawAvgSplit()));
-				display = (TextView) findViewById(R.id.totalTimeC);
-				display.setText(boatA.formatSplit((double) (boatA.getRawTime())));
-		   }
+			   Timer myTimer = new Timer();
+			      myTimer.schedule(new TimerTask() {
+			         @Override
+			         public void run() {
+			        	 boatA.update(boatA.getCox(), boatA.getTeamId());
+			        	 boatB.update(boatB.getCox(), boatB.getTeamId());
+			        	 coxA = boatA.getCox();
+			        	 coxB = boatB.getCox();
+			        	 splitA = boatA.formatSplit(boatA.getRawSplit());
+			        	 splitB = boatB.formatSplit(boatB.getRawSplit());
+			        	 metersA = boatA.getMeters();
+			        	 metersB = boatB.getMeters();
+			        	 rateA = boatA.getRate();
+			        	 rateB = boatB.getRate();
+			        	 avgSplitA = boatA.formatSplit(boatA.getRawAvgSplit());
+			        	 avgSplitB = boatB.formatSplit(boatA.getRawAvgSplit());
+			        	 totalTime = boatA.formatSplit((double) (boatA.getRawTime()));
+			         ;}
+			      }, 0, 1000);
+
+						   }
 		};
 	Thread updateThread = new Thread(updateRunnable);
 	
-	public void act () {
-		Timer myTimer = new Timer();
+	public void act() {
+		updateThread.start();
+		/*Timer myTimer = new Timer();
 	      myTimer.schedule(new TimerTask() {
 	         @Override
-	         public void run() {UpdateGUI();}
+	         public void run() {*/
+	        	 TextView display = (TextView) findViewById(R.id.coxA);
+	        	 display.setText(coxA + " ");
+	 	       	 display = (TextView) findViewById(R.id.coxB);
+	 	       	 display.setText(coxB + " ");
+	 	       	 display = (TextView) findViewById(R.id.splitA);
+	 	       	 display.setText(splitA + " ");
+	 	       	 display = (TextView) findViewById(R.id.splitB);
+	 	       	 display.setText(splitB + " ");
+	 	       	 display = (TextView) findViewById(R.id.metersA);
+	 	       	 display.setText(metersA + " m");
+	 	       	 display = (TextView) findViewById(R.id.metersB);
+	 	       	 display.setText(metersB + " m");
+	 	       	 display = (TextView) findViewById(R.id.rateA);
+	 	       	 display.setText(rateA + " spm");
+	 	       	 display = (TextView) findViewById(R.id.rateB);
+	 	       	 display.setText(rateB + " spm");
+	 	       	 display = (TextView) findViewById(R.id.avgSplitA);
+	 	       	 display.setText(avgSplitA + " ");
+	 	       	 display = (TextView) findViewById(R.id.avgSplitB);
+	 	       	 display.setText(avgSplitB + " ");
+	 	       	 display = (TextView) findViewById(R.id.totalTimeC);
+	 	       	 display.setText("Time: " + totalTime);
+/*	         ;}
 	      }, 0, 1000);
-	}
-	
-	public void UpdateGUI() {
-		updateThread.start();
+*/
 	}
 	
 	public void toggle(View v) {
