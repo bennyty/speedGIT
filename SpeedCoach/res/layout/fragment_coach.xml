@@ -16,13 +16,14 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
-        <Button
+        <ToggleButton
             android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
             android:onClick="toggle"
-            android:text="@string/start_Label" />
+            android:textOn="Updates on"
+    		android:textOff="Updates off"/>
 
         <TextView
             android:id="@+id/splitLabelC"
