@@ -27,25 +27,28 @@ public class CoachActivity extends ActionBarActivity {
 
 	Boat boatA = new Boat("Entheos", "Ben", 1);
 	Boat boatB = new Boat("First Four", "Mike", 1);
-	String coxA;
-	String coxB;
-	String splitA;
-	String splitB;
-	int metersA;
-	int metersB;
-	double rateA;
-	double rateB;
-	String avgSplitA;
-	String avgSplitB;
-	String totalTime;
+	String coxA = "Ready";
+	String coxB = "Ready";
+	String splitA = "0:00.0";
+	String splitB = "0:00.0";
+	int metersA = 0;
+	int metersB = 0;
+	double rateA = 0;
+	double rateB = 0;
+	String avgSplitA = "0:00.0";
+	String avgSplitB = "0:00.0";
+	String totalTime = "0:00.0";
 	boolean on = false;
 	boolean go = true;
+	boolean guiOn = false;
+	boolean updateOn = false;
 	final Runnable updateRunnable = new Runnable() {
 		   public void run() {
 			   Timer myTimer = new Timer();
 			      myTimer.schedule(new TimerTask() {
 			         @Override
 			         public void run() {	 
+			        	 if (updateOn) {
 			        	 	 boatA.update(boatA.getCox(), boatA.getTeamId());
 			        	 	 boatB.update(boatB.getCox(), boatB.getTeamId());
 				        	 coxA = boatA.getCox();
@@ -61,6 +64,7 @@ public class CoachActivity extends ActionBarActivity {
 				        	 totalTime = boatA.formatSplit((double) (boatA.getRawTime()));
 				        	 boatA.updateTime();
 				        	 boatB.updateTime();
+			        	 }
 			         ;}
 			      }, 0, 1000);
 
@@ -77,28 +81,30 @@ public class CoachActivity extends ActionBarActivity {
 		        runOnUiThread(new Runnable() {
 		          @Override
 		          public void run() {
-		        	  TextView display = (TextView) findViewById(R.id.coxA);
-		         	  display.setText(coxA + " ");
-		         	  display = (TextView) findViewById(R.id.coxB);
-		         	  display.setText(coxB + " ");
-		         	  display = (TextView) findViewById(R.id.splitA);
-		         	  display.setText(splitA + " ");
-		         	  display = (TextView) findViewById(R.id.splitB);
-		         	  display.setText(splitB + " ");
-		         	  display = (TextView) findViewById(R.id.metersA);
-		         	  display.setText(metersA + " m");
-		         	  display = (TextView) findViewById(R.id.metersB);
-		         	  display.setText(metersB + " m");
-		         	  display = (TextView) findViewById(R.id.rateA);
-		         	  display.setText(rateA + " spm");
-		         	  display = (TextView) findViewById(R.id.rateB);
-		         	  display.setText(rateB + " spm");
-		         	  display = (TextView) findViewById(R.id.avgSplitA);
-		         	  display.setText(avgSplitA + " ");
-		         	  display = (TextView) findViewById(R.id.avgSplitB);
-		         	  display.setText(avgSplitB + " ");
-		         	  display = (TextView) findViewById(R.id.totalTimeC);
-		         	  display.setText("Time: " + totalTime);
+		        	  if (guiOn) {
+			        	  TextView display = (TextView) findViewById(R.id.coxA);
+			         	  display.setText(coxA + " ");
+			         	  display = (TextView) findViewById(R.id.coxB);
+			         	  display.setText(coxB + " ");
+			         	  display = (TextView) findViewById(R.id.splitA);
+			         	  display.setText(splitA + " ");
+			         	  display = (TextView) findViewById(R.id.splitB);
+			         	  display.setText(splitB + " ");
+			         	  display = (TextView) findViewById(R.id.metersA);
+			         	  display.setText(metersA + " m");
+			         	  display = (TextView) findViewById(R.id.metersB);
+			         	  display.setText(metersB + " m");
+			         	  display = (TextView) findViewById(R.id.rateA);
+			         	  display.setText(rateA + " spm");
+			         	  display = (TextView) findViewById(R.id.rateB);
+			         	  display.setText(rateB + " spm");
+			         	  display = (TextView) findViewById(R.id.avgSplitA);
+			         	  display.setText(avgSplitA + " ");
+			         	  display = (TextView) findViewById(R.id.avgSplitB);
+			         	  display.setText(avgSplitB + " ");
+			         	  display = (TextView) findViewById(R.id.totalTimeC);
+			         	  display.setText("Time: " + totalTime);
+		        	  }
 		          }
 		        });
 		      }
@@ -108,29 +114,60 @@ public class CoachActivity extends ActionBarActivity {
 		};
 	
 	public void toggle(View v) {
+		
 		boolean on = ((ToggleButton) v).isChecked();
 		if (on) {
-			updateThread.start();
-			guiThread.start();
+			if (go) {
+				updateThread.start();
+				guiThread.start();
+			}
+			reset();
+			updateOn = true;
+			guiOn = true;
+			go = false;
 		}
 		else {
-			updateThread.interrupt();
-			guiThread.interrupt();
-			boatA.reset();
-			boatB.reset();
-			coxA = "Ready";
-	       	coxB = "Ready";
-	       	splitA = "0:00.0";
-	       	splitB = "0:00.0";
-	       	metersA = 0;
-	       	metersB = 0;
-	       	rateA = 0;
-	       	rateB = 0;
-	       	avgSplitA = "0:00.0";
-	       	avgSplitB = "0:00.0";
-	       	totalTime = "0:00";
+			updateOn = false;
+			guiOn = false;
 		}
 	} 
+	public void reset() {
+		  boatA.reset();
+		  boatB.reset();
+		  coxA = "Ready";
+		  coxB = "Ready";
+	      splitA = "0:00.0";
+		  splitB = "0:00.0";
+		  metersA = 0;
+		  metersB = 0;
+		  rateA = 0;
+	      rateB = 0;
+		  avgSplitA = "0:00.0";
+		  avgSplitB = "0:00.0";
+		  totalTime = "0:00.0";
+		  TextView display = (TextView) findViewById(R.id.coxA);
+     	  display.setText(coxA + " ");
+     	  display = (TextView) findViewById(R.id.coxB);
+     	  display.setText(coxB + " ");
+     	  display = (TextView) findViewById(R.id.splitA);
+     	  display.setText(splitA + " ");
+     	  display = (TextView) findViewById(R.id.splitB);
+     	  display.setText(splitB + " ");
+     	  display = (TextView) findViewById(R.id.metersA);
+     	  display.setText(metersA + " m");
+     	  display = (TextView) findViewById(R.id.metersB);
+     	  display.setText(metersB + " m");
+     	  display = (TextView) findViewById(R.id.rateA);
+     	  display.setText(rateA + " spm");
+     	  display = (TextView) findViewById(R.id.rateB);
+     	  display.setText(rateB + " spm");
+     	  display = (TextView) findViewById(R.id.avgSplitA);
+     	  display.setText(avgSplitA + " ");
+     	  display = (TextView) findViewById(R.id.avgSplitB);
+     	  display.setText(avgSplitB + " ");
+     	  display = (TextView) findViewById(R.id.totalTimeC);
+     	  display.setText("Time: " + totalTime);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
