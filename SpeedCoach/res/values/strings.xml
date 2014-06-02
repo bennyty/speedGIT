@@ -14,7 +14,7 @@
 	<string name="split_Label">Split:</string>
 	<string name="rate_Label">Rate:</string>
 	<string name="start_Label">Start</string>
-	<string name="tot_time_Label">Total Time:</string>
+	<string name="tot_time_Label">Total Time: 0:00</string>
 	<string name="meters_Label">Meters Rowed:</string>
 	<string name="avg_split_Label">Avg. Split</string>
 	<string name="who_are_you_Label">You Are A:</string>
@@ -22,8 +22,9 @@
 	<string name="coach_Label">Coach</string>
 	<string name="coxswain_Label">Coxswain</string>
 	<string name="viewer_Label">Regatta Viewer</string>
-	<string name="select">Press\nMenu</string>
-	<string name="no_boat">Select\nBoat</string>
+	<string name="ready">Ready</string>
+	<string name="blank_split">0:00.0</string>
+	<string name="blank_number">0</string>
 	
 	<string name="add_slot_a">Set Boat A</string>
 	<string name="add_slot_b">Set Boat B</string>

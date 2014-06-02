@@ -72,7 +72,6 @@ public class Boat {
 			e.printStackTrace();
 		}
 		avgCount++;
-		time++; //assumes this method is called once per second, if not will need to be altered
 	}
 	
 	public void setSplit(double s) {
@@ -136,5 +135,8 @@ public class Boat {
 	
 	public int getRawTime() {
 		return time;
+	}
+	public void updateTime(){
+		time++;
 	}
 }

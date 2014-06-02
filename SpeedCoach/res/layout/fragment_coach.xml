@@ -82,35 +82,35 @@
             android:id="@+id/coxB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/select" />
+            android:text="@string/ready" />
 
         <TextView
             android:id="@+id/splitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_split" />
 
         <TextView
             android:id="@+id/metersB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_number" />
 
         <TextView
             android:id="@+id/rateB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_number" />
 
         <TextView
             android:id="@+id/avgSplitB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_split" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,48 +126,34 @@
             android:id="@+id/coxA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/select" />
+            android:text="@string/ready" />
 
         <TextView
             android:id="@+id/splitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_split" />
 
         <TextView
             android:id="@+id/metersA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_number" />
 
         <TextView
             android:id="@+id/rateA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
+            android:text="@string/blank_number" />
 
         <TextView
             android:id="@+id/avgSplitA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@string/no_boat" />
-        
-        <TextView
-        android:id="@+id/tvLat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvLong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:text="@string/blank_split" />
         </LinearLayout>
     </RelativeLayout>
