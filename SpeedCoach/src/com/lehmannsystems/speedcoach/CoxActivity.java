@@ -1,8 +1,5 @@
 package com.lehmannsystems.speedcoach;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
@@ -146,7 +143,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
-		case R.id.add_slot_a:
+		case R.id.action_reset:
 			reset(loc);
 			return true;
 		default:
