@@ -87,6 +87,9 @@ public class Boat {
 		meters = 0;
 		avgCount = 0;
 		time = 0;
+		rate = 0;
+		splitSeconds = 0;
+		avgTotalSplit = 0;
 	}
 	
 	public String getName() {

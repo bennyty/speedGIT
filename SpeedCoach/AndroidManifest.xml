@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,15 +28,20 @@
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.CoxActivity"
-            android:label="@string/title_activity_cox" >
+            android:label="@string/title_activity_cox" 
+            android:theme="@style/CoxTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.CoachActivity"
-            android:label="@string/title_activity_coach" >
+            android:label="@string/title_activity_coach"
+            android:theme="@style/CoachTheme"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.RegattaViewFullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_regatta_view_fullscreen"
             android:theme="@style/FullscreenTheme" >
         </activity>

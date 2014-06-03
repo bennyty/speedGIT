@@ -61,7 +61,7 @@ public class CoachActivity extends ActionBarActivity {
 				        	 rateB = boatB.getRate();
 				        	 avgSplitA = boatA.formatSplit(boatA.getRawAvgSplit());
 				        	 avgSplitB = boatB.formatSplit(boatB.getRawAvgSplit());
-				        	 totalTime = boatA.formatSplit((double) (boatA.getRawTime()));
+				        	 totalTime = boatA.formatSplit((boatA.getRawTime()));
 				        	 boatA.updateTime();
 				        	 boatB.updateTime();
 			        	 }
@@ -103,7 +103,7 @@ public class CoachActivity extends ActionBarActivity {
 			         	  display = (TextView) findViewById(R.id.avgSplitB);
 			         	  display.setText(avgSplitB + " ");
 			         	  display = (TextView) findViewById(R.id.totalTimeC);
-			         	  display.setText("Time: " + totalTime);
+			         	  display.setText("Time: " + totalTime.substring(0, 4));
 		        	  }
 		          }
 		        });
@@ -144,7 +144,7 @@ public class CoachActivity extends ActionBarActivity {
 	      rateB = 0;
 		  avgSplitA = "0:00.0";
 		  avgSplitB = "0:00.0";
-		  totalTime = "0:00.0";
+		  totalTime = "0:00";
 		  TextView display = (TextView) findViewById(R.id.coxA);
      	  display.setText(coxA + " ");
      	  display = (TextView) findViewById(R.id.coxB);
@@ -171,7 +171,7 @@ public class CoachActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_coach);
 
 		if (savedInstanceState == null) {
