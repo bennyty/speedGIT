@@ -29,5 +29,7 @@
 	<string name="add_slot_a">Set Boat A</string>
 	<string name="add_slot_b">Set Boat B</string>
 	
+	<string name="action_reset">Reset</string>
+	
 	
 </resources>

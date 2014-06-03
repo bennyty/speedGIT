@@ -1,8 +1,10 @@
 package com.lehmannsystems.speedcoach;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
-public class CoxActivity extends ActionBarActivity {
+public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	Context context;
+	TextView display;
+
+	Boat myBoat;
+	Location loc;
+
+	private double oldLatitude;
+	private double oldLongitude;
+	private double newLatitude;
+	private double newLongitude;
+	private float[] locResults;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,29 +36,100 @@ public class CoxActivity extends ActionBarActivity {
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+
+		myBoat = new Boat("Entheos Tester", "Mike", 1);
+		locResults = new float[1];
+		oldLatitude = 200;
+		oldLongitude = 200;
 
 		// Acquire a reference to the system Location Manager
 		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-		// Define a listener that responds to location updates
-		LocationListener locationListener = new LocationListener() {
-		    public void onLocationChanged(Location location) {
-		      // Called when a new location is found by the network location provider.
-		      Toast.makeText(context, "Current speed:" + location.getSpeed(), Toast.LENGTH_SHORT).show();
-		    }
+		updateThread.start();
+		guiThread.start();
+	}
 
-		    public void onStatusChanged(String provider, int status, Bundle extras) {}
+	private void reset(Location loc) {
+		myBoat.reset();
+		oldLatitude = loc.getLatitude();
+		oldLongitude = loc.getLongitude();
+		myBoat.setMeters(0);
+	}
 
-		    public void onProviderEnabled(String provider) {}
+	Thread updateThread = new Thread() {
+		public void run() {
+			while (!isInterrupted()) {
+				if (loc!=null) {
+					if (oldLatitude == 200 || oldLongitude == 200) {
+						oldLatitude = loc.getLatitude();
+						oldLongitude = loc.getLongitude();
+						myBoat.setMeters(0);
+					} else {
+						newLatitude = loc.getLatitude();
+						newLongitude = loc.getLongitude();
+						Location.distanceBetween(oldLatitude, oldLongitude, newLatitude, newLongitude, locResults);
+						myBoat.setMeters((int) locResults[0]);
+						oldLatitude = newLatitude;
+						oldLongitude = newLongitude;
+					}
 
-		    public void onProviderDisabled(String provider) {}
-		  };
+					myBoat.setSplitSeconds(500 / loc.getSpeed());
+				}
+			}
+		}
+	};
 
-		// Register the listener with the Location Manager to receive location updates
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+	Thread guiThread = new Thread() {
+		public void run() {
+			while (!isInterrupted()) {
+				runOnUiThread(new Runnable() {
+					public void run() {
+						TextView display = (TextView) findViewById(R.id.tvMeters);
+						display.setText(myBoat.getMeters() + " m");
+						display = (TextView) findViewById(R.id.tvSplit);
+						display.setText(myBoat.formatSplit(myBoat.getRawSplit()) + "");
+						display = (TextView) findViewById(R.id.tvTime);
+						display.setText(myBoat.formatSplit(myBoat.getRawTime()) + "");
+						display = (TextView) findViewById(R.id.tvAvgSplit);
+						display.setText(myBoat.formatSplit(myBoat.getRawAvgSplit()) + " ");
+						display = (TextView) findViewById(R.id.tvRate);
+						display.setText(myBoat.getRate() + "spm");
+					}
+				});
+			}
+		}
+	};
 
+	public void onLocationChanged(Location loc)
+	{
+		if (loc != null)
+		{
+			this.loc = loc;
+		}
+	}
+
+	public void onProviderDisabled(String provider)
+	{
+		// TODO: do something one day?
+	}
+
+	public void onProviderEnabled(String provider)
+	{
+		// TODO: do something one day?
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle extras)
+	{
+		// TODO: do something one day?
+
+	}
+
+	public void onGpsStatusChanged(int event)
+	{
+		// TODO: do something one day?
 	}
 
 	@Override
@@ -61,11 +145,13 @@ public class CoxActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.add_slot_a:
+			reset(loc);
 			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	/**

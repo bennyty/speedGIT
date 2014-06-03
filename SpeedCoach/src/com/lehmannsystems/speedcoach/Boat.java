@@ -74,14 +74,6 @@ public class Boat {
 		avgCount++;
 	}
 	
-	public void setSplit(double s) {
-		splitSeconds = s;
-	}
-	
-	public void setRate(int r) {
-		rate = r;
-	}
-	
 	public void reset() {
 		time = 0;
 		meters = 0;
@@ -98,12 +90,12 @@ public class Boat {
 	}
 	
 	public double getRate() {
-		update(cox, teamId);
+		//update(cox, teamId);
 		return rate;
 	}
 	
 	public double getRawSplit() {
-		update(cox, teamId);
+		//update(cox, teamId);
 		return splitSeconds;
 	}
 	
@@ -138,5 +130,33 @@ public class Boat {
 	}
 	public void updateTime(){
 		time++;
+	}
+
+	/**
+	 * @param splitSeconds the splitSeconds to set
+	 */
+	public void setSplitSeconds(double splitSeconds) {
+		this.splitSeconds = splitSeconds;
+	}
+	
+	/**
+	 * @param time the time to set
+	 */
+	public void setRawTime(int time) {
+		this.time = time;
+	}
+
+	/**
+	 * @param rate the rate to set
+	 */
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	/**
+	 * @param meters the meters to set
+	 */
+	public void setMeters(int meters) {
+		this.meters = meters;
 	}
 }

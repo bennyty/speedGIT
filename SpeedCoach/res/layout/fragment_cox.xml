@@ -9,7 +9,7 @@
     tools:context="com.lehmannsystems.speedcoach.CoxActivity$PlaceholderFragment" >
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvMeters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         android:textSize="32sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -39,7 +39,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tvSplit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
@@ -48,21 +48,21 @@
             android:textSize="64sp" />
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvAvgSplit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:text="Average Split"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:text="Total Time"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
