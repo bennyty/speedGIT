@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -47,6 +47,7 @@
     <style name="CoachTitleText"
            parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:textColor">@color/coach_title</item>
+        <item name="android:textSize">17sp</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
     
@@ -62,6 +63,23 @@
     <style name="CoxTitleText"
            parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:textColor">@color/cox_title</item>
+        <item name="android:textSize">17sp</item>
+        <!-- The textColor property is backward compatible with the Support Library -->
+    </style>
+    
+    <style name="WhoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/WhoActionBar</item>
+    </style>
+    
+    <style name="WhoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/viewer_bar</item>
+        <item name="android:titleTextStyle">@style/WhoTitleText</item>
+    </style>
+    
+    <style name="WhoTitleText"
+           parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:textColor">@color/viewer_title</item>
+        <item name="android:textSize">17sp</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
     

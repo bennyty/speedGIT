@@ -9,11 +9,11 @@
     tools:context="com.lehmannsystems.basicspeedcoach.MainActivity$PlaceholderFragment" >
 
     <TextView
-        android:id="@+id/splitLabelC"
+        android:id="@+id/WhoAreYouLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="You Are A:"
+        android:text="@string/who_are_you_Label"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:onClick="setPersonType"
-        android:text="Coach" />
+        android:text="@string/coach_Label" />
 
     <Button
         android:id="@+id/SelectCoxswain"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/SelectCoach"
         android:onClick="setPersonType"
-        android:text="Coxswain" />
+        android:text="@string/coxswain_Label" />
 
     <Button
         android:id="@+id/SelectViewer"
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/SelectCoxswain"
         android:onClick="setPersonType"
-        android:text="Regatta Viewer" />
+        android:text="@string/viewer_Label" />
 
 </RelativeLayout>

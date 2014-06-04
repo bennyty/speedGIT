@@ -47,7 +47,8 @@
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.WhoAreYouActivity"
-            android:label="@string/title_activity_who_are_you" >
+            android:label="@string/title_activity_who_are_you"
+            android:theme="@style/WhoTheme" >
         </activity>
     </application>
 

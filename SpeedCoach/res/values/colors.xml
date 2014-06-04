@@ -28,7 +28,10 @@
     <color name="coach_bar">#EF4424</color>
     <color name="coach_title">#FFFFFFFF</color>
     
-    <color name="cox_bar">#002C00</color>
+    <color name="cox_bar">#38B449</color>
     <color name="cox_title">#FFFFFFFF</color>
+    
+    <color name="viewer_bar">#4768B1</color>
+    <color name="viewer_title">#FFFFFFFF</color>
 
 </resources>
