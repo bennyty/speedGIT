@@ -13,7 +13,8 @@
     
 	<string name="split_Label">Split:</string>
 	<string name="rate_Label">Rate:</string>
-	<string name="start_Label">Start</string>
+    <string name="start_Label">Start</string> -->
+	<string name="stop_Label">Stop</string> -->
 	<string name="tot_time_Label">Total Time: 0:00</string>
 	<string name="meters_Label">Meters Rowed:</string>
 	<string name="avg_split_Label">Avg. Split</string>
