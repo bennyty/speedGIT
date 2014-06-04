@@ -41,6 +41,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	boolean go = true;
 	boolean guiOn = false;
 	boolean updateOn = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,20 +49,20 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-			.add(R.id.container, new PlaceholderFragment()).commit();
+					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
 		oldLatitude = 200;
 		oldLongitude = 200;
-		
+
 	}
 
 	protected void onStart() {
 		super.onStart();
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
 		locResults = new float[1];
-		
-		go = true;
+
+		//go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
 		b.setChecked(false);
 
@@ -80,35 +81,35 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	}
 
-	private void showGPSDisabledAlertToUser() {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder
-		.setMessage(
-				"GPS is disabled in your device. Would you like to enable it?")
-				.setCancelable(false)
-				.setPositiveButton("Goto Settings Page To Enable GPS",
-						new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						Intent callGPSSettingIntent = new Intent(
-								android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-						startActivity(callGPSSettingIntent);
-					}
-				});
-		alertDialogBuilder.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		AlertDialog alert = alertDialogBuilder.create();
-		alert.show();
-	}
-
 	protected void onStop() {
 		super.onStop();
 
 		updateThread.interrupt();
 		guiThread.interrupt();
+	}
+
+	private void showGPSDisabledAlertToUser() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"GPS is disabled in your device. Would you like to enable it?")
+				.setCancelable(false)
+				.setPositiveButton("Goto Settings Page To Enable GPS",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								Intent callGPSSettingIntent = new Intent(
+										android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+								startActivity(callGPSSettingIntent);
+							}
+						});
+		alertDialogBuilder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
 	}
 
 	private void reset(Location loc) {
@@ -137,50 +138,52 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	Thread updateThread = new Thread() {
 		public void run() {
-			URL db;
-			BufferedReader in;
-			while (!isInterrupted()) {
-				if (updateOn) {
-					if (loc != null) {
-						if (oldLatitude == 200 || oldLongitude == 200) {
-							oldLatitude = loc.getLatitude();
-							oldLongitude = loc.getLongitude();
-							myBoat.setMeters(0);
-						} else {
-							newLatitude = loc.getLatitude();
-							newLongitude = loc.getLongitude();
-							Location.distanceBetween(oldLatitude, oldLongitude,
-									newLatitude, newLongitude, locResults);
-							myBoat.setMeters((int) locResults[0]);
-							oldLatitude = newLatitude;
-							oldLongitude = newLongitude;
-						}
+			try {
+				URL db;
+				BufferedReader in;
+				while (!isInterrupted()) {
+					if (updateOn) {
+						if (loc != null) {
+							if (oldLatitude == 200 || oldLongitude == 200) {
+								oldLatitude = loc.getLatitude();
+								oldLongitude = loc.getLongitude();
+								myBoat.setMeters(0);
+							} else {
+								newLatitude = loc.getLatitude();
+								newLongitude = loc.getLongitude();
+								Location.distanceBetween(oldLatitude,
+										oldLongitude, newLatitude,
+										newLongitude, locResults);
+								myBoat.setMeters((int) locResults[0]);
+								oldLatitude = newLatitude;
+								oldLongitude = newLongitude;
+							}
 
-						myBoat.setSplitSeconds(500 / loc.getSpeed());
+							myBoat.setSplitSeconds(500 / loc.getSpeed());
 
-						try {
-							db = new URL(
-									"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
-											+ "cid=" + myBoat.getCox() + "&tid="
-											+ myBoat.getTeamId() + "&spm="
-											+ myBoat.getRate() + "&mps="
-											+ myBoat.getRawSplit() + "&mt="
-											+ myBoat.getMeters());
-							in = new BufferedReader(new InputStreamReader(
-									db.openStream()));
-							in.readLine();
-						} catch (MalformedURLException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
+							try {
+								db = new URL(
+										"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
+												+ "cid=" + myBoat.getCox()
+												+ "&tid=" + myBoat.getTeamId()
+												+ "&spm=" + myBoat.getRate()
+												+ "&mps="
+												+ myBoat.getRawSplit() + "&mt="
+												+ myBoat.getMeters());
+								in = new BufferedReader(new InputStreamReader(
+										db.openStream()));
+								in.readLine();
+							} catch (MalformedURLException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
-					}
-					try {
 						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
 				}
+			} catch (InterruptedException e) {
+				return;
 			}
 		}
 	};
@@ -198,11 +201,11 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 								TextView display = (TextView) findViewById(R.id.tvMeters);
 								display.setText(myBoat.getMeters() + " m");
 								display = (TextView) findViewById(R.id.tvSplit);
-								display.setText(myBoat.formatSplit(myBoat.getRawSplit())
-										+ "");
+								display.setText(myBoat.formatSplit(myBoat
+										.getRawSplit()) + "");
 								display = (TextView) findViewById(R.id.tvTime);
-								display.setText(myBoat.formatSplit(myBoat.getRawTime())
-										+ "");
+								display.setText(myBoat.formatSplit(myBoat
+										.getRawTime()) + "");
 								display = (TextView) findViewById(R.id.tvAvgSplit);
 								display.setText(myBoat.formatSplit(myBoat
 										.getRawAvgSplit()) + " ");
@@ -213,71 +216,71 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 					});
 				}
 			} catch (InterruptedException e) {
-				
-			}
-			}
-		};
-
-		public void onLocationChanged(Location loc) {
-			if (loc != null) {
-				this.loc = loc;
+				return;
 			}
 		}
+	};
 
-		public void onProviderDisabled(String provider) {
-			// TODO: do something one day?
+	public void onLocationChanged(Location loc) {
+		if (loc != null) {
+			this.loc = loc;
 		}
+	}
 
-		public void onProviderEnabled(String provider) {
-			// TODO: do something one day?
-		}
+	public void onProviderDisabled(String provider) {
+		// TODO: do something one day?
+	}
 
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO: do something one day?
+	public void onProviderEnabled(String provider) {
+		// TODO: do something one day?
+	}
 
-		}
-
-		public void onGpsStatusChanged(int event) {
-			// TODO: do something one day?
-		}
-
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.cox, menu);
-			return true;
-		}
-
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
-			switch (item.getItemId()) {
-			case R.id.action_reset:
-				reset(loc);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-			}
-		}
-
-		/**
-		 * A placeholder fragment containing a simple view.
-		 */
-		public static class PlaceholderFragment extends Fragment {
-
-			public PlaceholderFragment() {
-			}
-
-			@Override
-			public View onCreateView(LayoutInflater inflater, ViewGroup container,
-					Bundle savedInstanceState) {
-				View rootView = inflater.inflate(R.layout.fragment_cox, container,
-						false);
-				return rootView;
-			}
-		}
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO: do something one day?
 
 	}
+
+	public void onGpsStatusChanged(int event) {
+		// TODO: do something one day?
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.cox, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		switch (item.getItemId()) {
+		case R.id.action_reset:
+			reset(loc);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_cox, container,
+					false);
+			return rootView;
+		}
+	}
+
+}

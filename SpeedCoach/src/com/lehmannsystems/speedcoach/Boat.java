@@ -60,6 +60,8 @@ public class Boat {
 		    	rate = json.getDouble("rate");
 		    	meters = json.getInt("meters");
 		    	splitSeconds = 500 / json.getDouble("mtpersec");
+		    	if (splitSeconds>600)
+		    		splitSeconds = 600;
 		    	avgTotalSplit += splitSeconds;
 		    } else {
 		    	rate = -1;

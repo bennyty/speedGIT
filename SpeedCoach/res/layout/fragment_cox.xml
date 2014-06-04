@@ -52,7 +52,6 @@
             android:id="@+id/tvAvgSplit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:text="Average Split"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -61,10 +60,10 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:text="Total Time"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </LinearLayout>
 
     <ToggleButton
@@ -73,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textOn="@string/start_Label"
-        android:textOff="@string/stop_Label"
+        android:textOn="@string/stop_Label"
+        android:textOff="@string/start_Label"
         android:onClick="toggle" />
 
 </RelativeLayout>
