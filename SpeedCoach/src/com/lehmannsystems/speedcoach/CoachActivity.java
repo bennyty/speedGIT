@@ -113,6 +113,21 @@ public class CoachActivity extends ActionBarActivity {
 		  }
 		};
 	
+	public void onStop() {
+		super.onStop();
+		updateThread.interrupt();
+		guiThread.interrupt();
+		guiOn = false;
+		updateOn = false;
+	}
+	
+	public void onStart() {
+		super.onStart();
+		go = true;
+		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
+		b.setChecked(false);
+	}
+	
 	public void toggle(View v) {
 		
 		boolean on = ((ToggleButton) v).isChecked();
