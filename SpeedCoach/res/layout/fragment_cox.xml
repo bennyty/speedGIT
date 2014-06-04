@@ -66,4 +66,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
+    <ToggleButton
+        android:id="@+id/updateToggler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textOn="@string/start_Label"
+        android:textOff="@string/stop_Label"
+        android:onClick="toggle" />
+
 </RelativeLayout>
