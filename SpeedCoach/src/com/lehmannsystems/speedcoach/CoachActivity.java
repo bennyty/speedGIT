@@ -3,6 +3,7 @@ package com.lehmannsystems.speedcoach;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class CoachActivity extends ActionBarActivity {
 	String avgSplitA = "0:00.0";
 	String avgSplitB = "0:00.0";
 	String totalTime = "0:00.0";
+	Intent intent;
 	boolean on = false;
 	boolean go = true;
 	boolean guiOn = false;
@@ -206,8 +208,9 @@ public class CoachActivity extends ActionBarActivity {
 	        case R.id.add_slot_b:
 	            addBoatB();
 	            return true;
-	        case R.id.action_settings:
-	            //openSettings();
+	        case R.id.change_view:
+	        	intent = new Intent(this, WhoAreYouActivity.class);
+				startActivity(intent);
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -239,4 +242,5 @@ public class CoachActivity extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

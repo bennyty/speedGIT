@@ -8,5 +8,9 @@
         android:orderInCategory="100"
         android:title="@string/action_reset"
         app:showAsAction="never"/>
+    <item
+    	android:id="@+id/change_view"
+        android:orderInCategory="200"
+        android:title="@string/change_view" />
 
 </menu>
