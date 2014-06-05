@@ -70,9 +70,9 @@ public class CoachActivity extends ActionBarActivity {
 		  @Override
 		  public void run() {
 		    try {
-		      Thread.sleep(250);
+		      //Thread.sleep(250);
 		      while (!isInterrupted()) {
-		        Thread.sleep(1000);
+		        Thread.sleep(500);
 		        runOnUiThread(new Runnable() {
 		          @Override
 		          public void run() {
