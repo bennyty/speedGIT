@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/start"
+        android:background="@drawable/toggle_changer"
         android:onClick="toggle"
         android:textOff="@string/start_Label"
         android:textOn="@string/stop_Label" />

@@ -69,11 +69,12 @@
     </LinearLayout>
 
     <ToggleButton
-        android:id="@+id/updateToggler"
+        android:id="@+id/updateTogglerCox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/toggle_changer"
         android:textOn="@string/stop_Label"
         android:textOff="@string/start_Label"
         android:onClick="toggle" />
