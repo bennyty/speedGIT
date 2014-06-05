@@ -31,11 +31,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	Boat myBoat;
 	Location loc;
 
-	private double oldLatitude;
-	private double oldLongitude;
-	private double newLatitude;
-	private double newLongitude;
-	private float[] locResults;
+	private Location oldLocation;
 
 	boolean on = false;
 	boolean go = true;
@@ -52,15 +48,13 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
-		oldLatitude = 200;
-		oldLongitude = 200;
+		oldLocation = null;
 
 	}
 
 	protected void onStart() {
 		super.onStart();
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
-		locResults = new float[1];
 
 		//go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
@@ -114,8 +108,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	private void reset(Location loc) {
 		myBoat.reset();
-		oldLatitude = loc.getLatitude();
-		oldLongitude = loc.getLongitude();
+		oldLocation = loc;
 		myBoat.setMeters(0);
 	}
 
@@ -144,19 +137,12 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 				while (!isInterrupted()) {
 					if (updateOn) {
 						if (loc != null) {
-							if (oldLatitude == 200 || oldLongitude == 200) {
-								oldLatitude = loc.getLatitude();
-								oldLongitude = loc.getLongitude();
+							if (oldLocation == null) {
+								oldLocation = loc;
 								myBoat.setMeters(0);
 							} else {
-								newLatitude = loc.getLatitude();
-								newLongitude = loc.getLongitude();
-								Location.distanceBetween(oldLatitude,
-										oldLongitude, newLatitude,
-										newLongitude, locResults);
-								myBoat.setMeters((int) locResults[0]);
-								oldLatitude = newLatitude;
-								oldLongitude = newLongitude;
+								myBoat.setMeters(myBoat.getMeters() + (int) loc.distanceTo(oldLocation));
+								oldLocation = loc;
 							}
 
 							myBoat.setSplitSeconds(500 / loc.getSpeed());
