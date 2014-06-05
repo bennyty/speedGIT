@@ -25,8 +25,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class CoxActivity extends ActionBarActivity implements GPSInterface {
-	Context context;
-	TextView display;
 
 	Boat myBoat;
 	Location loc;
@@ -35,12 +33,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	private Location oldLocation;
 
 	Intent intent;
-	// boolean updateOn = false;
-
-	URL db;
-	BufferedReader in;
-	boolean updateOn = false;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,7 +53,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
 
 		// go = true;
-		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
+		ToggleButton b = (ToggleButton) findViewById(R.id.updateTogglerCox);
 		b.setChecked(false);
 
 		// Acquire a reference to the system Location Manager
