@@ -31,6 +31,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	Boat myBoat;
 	Location loc;
 
+	LocationManager locationManager;
 	private Location oldLocation;
 
 	boolean on = false;
@@ -65,10 +66,10 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		b.setChecked(false);
 		
 		// Acquire a reference to the system Location Manager
-		LocationManager locationManager = (LocationManager) this
+		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, this);
+		/*locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+				0, this);*/
 
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			Toast.makeText(this, "GPS is Enabled in your device.",
@@ -127,9 +128,12 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 			//updateOn = true;
 			guiOn = true;
 			go = false;
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+					0, this);
 		} else {
 			//updateOn = false;
 			guiOn = false;
+			locationManager.removeUpdates(this);
 		}
 	}
 /*
@@ -184,7 +188,6 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	Thread guiThread = new Thread() {
 		public void run() {
 			try {
-				Thread.sleep(250);
 				while (!isInterrupted()) {
 					Thread.sleep(1000);
 					runOnUiThread(new Runnable() {
