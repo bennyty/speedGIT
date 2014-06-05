@@ -34,23 +34,12 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	LocationManager locationManager;
 	private Location oldLocation;
 
-<<<<<<< HEAD
 	Intent intent;
 	// boolean updateOn = false;
 
 	URL db;
 	BufferedReader in;
 	boolean updateOn = false;
-=======
-	boolean on = false;
-	boolean go = true;
-	boolean guiOn = false;
-	Intent intent;
-	//boolean updateOn = false;
-	
-	URL db;
-	BufferedReader in;
->>>>>>> b072fd9c700775f3a94bb1b2554121d20f85b739
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +60,16 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
 
 		// go = true;
-		ToggleButton b = (ToggleButton) findViewById(R.id.updateTogglerCox);
+		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
 		b.setChecked(false);
-		
+
 		// Acquire a reference to the system Location Manager
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
-<<<<<<< HEAD
 		/*
 		 * locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 		 * 0, 0, this);
 		 */
-=======
-		/*locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, this);*/
->>>>>>> b072fd9c700775f3a94bb1b2554121d20f85b739
 
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			Toast.makeText(this, "GPS is Enabled in your device.",
@@ -99,7 +83,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	protected void onStop() {
 		super.onStop();
 
-		//updateThread.interrupt();
+		updateThread.interrupt();
 		guiThread.interrupt();
 	}
 
@@ -137,27 +121,12 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 		boolean on = ((ToggleButton) v).isChecked();
 		if (on) {
-<<<<<<< HEAD
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		} else {
-=======
-			if (go) {
-				//updateThread.start();
-				guiThread.start();
-			}
-			//updateOn = true;
-			guiOn = true;
-			go = false;
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-					0, this);
-		} else {
-			//updateOn = false;
-			guiOn = false;
->>>>>>> b072fd9c700775f3a94bb1b2554121d20f85b739
 			locationManager.removeUpdates(this);
 		}
 	}
-/*
+
 	Thread updateThread = new Thread() {
 		public void run() {
 			URL db;
@@ -195,10 +164,9 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 			}
 		}
 	};
-*/
+
 	Thread guiThread = new Thread() {
 		public void run() {
-<<<<<<< HEAD
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -215,31 +183,6 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 							+ " ");
 					display = (TextView) findViewById(R.id.tvRate);
 					display.setText(myBoat.getRate() + "spm");
-=======
-			try {
-				while (!isInterrupted()) {
-					Thread.sleep(1000);
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							if (guiOn) {
-								display = (TextView) findViewById(R.id.tvMeters);
-								display.setText(myBoat.getMeters() + " m");
-								display = (TextView) findViewById(R.id.tvSplit);
-								display.setText(myBoat.formatSplit(myBoat
-										.getRawSplit()) + "");
-								display = (TextView) findViewById(R.id.tvTime);
-								display.setText(myBoat.formatSplit(myBoat
-										.getRawTime()) + "");
-								/*display = (TextView) findViewById(R.id.tvAvgSplit);
-								display.setText(myBoat.formatSplit(myBoat
-										.getRawAvgSplit()) + " ");*/
-								display = (TextView) findViewById(R.id.tvRate);
-								display.setText(myBoat.getRate() + "spm");
-							}
-						}
-					});
->>>>>>> b072fd9c700775f3a94bb1b2554121d20f85b739
 				}
 			});
 		}
@@ -247,42 +190,9 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	public void onLocationChanged(Location loc) {
 		if (loc != null) {
-<<<<<<< HEAD
 			this.loc = loc;
 			updateThread.start();
 			guiThread.start();
-=======
-			if (oldLocation == null) {
-				oldLocation = loc;
-				myBoat.setMeters(0);
-			} else {
-				myBoat.setMeters(myBoat.getMeters()
-						+ (int) loc.distanceTo(oldLocation));
-				oldLocation = loc;
-			}
-
-			myBoat.setSplitSeconds(500 / loc.getSpeed());
-			if (myBoat.getRawSplit()>600)
-				myBoat.setSplitSeconds(600);
-
-			try {
-				db = new URL(
-						"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
-								+ "cid=" + myBoat.getCox()
-								+ "&tid=" + myBoat.getTeamId()
-								+ "&spm=" + myBoat.getRate()
-								+ "&mps="
-								+ myBoat.getRawSplit() + "&mt="
-								+ myBoat.getMeters());
-				in = new BufferedReader(new InputStreamReader(
-						db.openStream()));
-				in.readLine();
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
->>>>>>> b072fd9c700775f3a94bb1b2554121d20f85b739
 		}
 	}
 
