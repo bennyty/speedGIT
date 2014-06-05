@@ -35,6 +35,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/totalTimeC"
         android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical"
         tools:context=".CoachActivity" >
 

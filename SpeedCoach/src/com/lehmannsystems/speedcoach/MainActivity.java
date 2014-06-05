@@ -25,6 +25,12 @@ public class MainActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		Intent intent;
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		//SharedPreferences.Editor prefEditor = prefs.edit();
@@ -59,12 +65,7 @@ public class MainActivity extends ActionBarActivity {
 	    	}
 	    }
 	}
-	/*
-	@Override
-	protected void onResume() {
-		   
-	}
-	*/
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
