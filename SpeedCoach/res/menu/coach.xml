@@ -14,9 +14,9 @@
         android:title="@string/add_slot_b"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/change_view"
         android:orderInCategory="300"
-        android:title="@string/action_settings"
+        android:title="@string/change_view"
         app:showAsAction="never"/>
 
 </menu>

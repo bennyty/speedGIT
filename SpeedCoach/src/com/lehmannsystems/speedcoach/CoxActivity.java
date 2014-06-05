@@ -36,6 +36,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	boolean on = false;
 	boolean go = true;
 	boolean guiOn = false;
+	Intent intent;
 	//boolean updateOn = false;
 	
 	URL db;
@@ -281,6 +282,10 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		switch (item.getItemId()) {
 		case R.id.action_reset:
 			reset(loc);
+			return true;
+		case R.id.change_view:
+			intent = new Intent(this, WhoAreYouActivity.class);
+			startActivity(intent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
