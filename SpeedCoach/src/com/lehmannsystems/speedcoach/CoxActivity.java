@@ -70,12 +70,16 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		} else {
 			showGPSDisabledAlertToUser();
 		}
+		
+		updateThread.start();
+		guiThread.start();
 
 	}
 
 	protected void onStop() {
 		super.onStop();
-
+		updateThread.interrupt();
+		guiThread.interrupt();
 		locationManager.removeUpdates(this);
 	}
 
@@ -154,9 +158,10 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 					e.printStackTrace();
 				}
 			}
+			return;
 		}
 	};
-
+ 
 	Thread guiThread = new Thread() {
 		public void run() {
 			runOnUiThread(new Runnable() {
@@ -175,16 +180,19 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 							+ " ");
 					display = (TextView) findViewById(R.id.tvRate);
 					display.setText(myBoat.getRate() + "spm");
+					return;
 				}
 			});
+			return;
 		}
 	};
 
 	public void onLocationChanged(Location loc) {
 		if (loc != null) {
 			this.loc = loc;
-			updateThread.start();
-			guiThread.start();
+			
+			updateThread.run();
+			guiThread.run();
 		}
 	}
 
