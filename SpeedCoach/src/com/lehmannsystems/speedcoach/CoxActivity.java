@@ -191,8 +191,8 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		if (loc != null) {
 			this.loc = loc;
 			
-			updateThread.run();
-			guiThread.run();
+			updateThread.start();
+			guiThread.start();
 		}
 	}
 
