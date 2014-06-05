@@ -3,6 +3,7 @@ package com.lehmannsystems.speedcoach;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -94,7 +96,7 @@ public class CoachActivity extends ActionBarActivity {
 			         	  display = (TextView) findViewById(R.id.avgSplitB);
 			         	  display.setText(avgSplitB + " ");
 			         	  display = (TextView) findViewById(R.id.totalTimeC);
-			         	  display.setText("Time: " + totalTime.substring(0, 4));
+			         	  display.setText(totalTime.substring(0, 4));
 		        	  }
 		          }
 		        });
@@ -114,13 +116,11 @@ public class CoachActivity extends ActionBarActivity {
 	
 	public void onStart() {
 		super.onStart();
-		go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
 		b.setChecked(false);
 	}
 	
 	public void toggle(View v) {
-		
 		boolean on = ((ToggleButton) v).isChecked();
 		if (on) {
 			if (go) {
@@ -172,7 +172,7 @@ public class CoachActivity extends ActionBarActivity {
      	  display = (TextView) findViewById(R.id.avgSplitB);
      	  display.setText(avgSplitB + " ");
      	  display = (TextView) findViewById(R.id.totalTimeC);
-     	  display.setText("Time: " + totalTime);
+     	  display.setText(totalTime);
 	}
 	
 	@Override
