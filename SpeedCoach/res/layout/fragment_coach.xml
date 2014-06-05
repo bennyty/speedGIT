@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/toggle_changer"
         android:onClick="toggle"
+        android:textColor="@color/coach_title"
         android:textColorHint="@color/coach_title"
         android:textOff="@string/start_Label"
         android:textOn="@string/stop_Label"

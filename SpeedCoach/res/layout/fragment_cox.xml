@@ -76,6 +76,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/toggle_changer"
         android:onClick="toggle"
+        android:textColor="@color/cox_title"
         android:textColorHint="@color/cox_title"
         android:textOff="@string/start_Label"
         android:textOn="@string/stop_Label"
