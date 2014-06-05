@@ -36,7 +36,10 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	boolean on = false;
 	boolean go = true;
 	boolean guiOn = false;
-	boolean updateOn = false;
+	//boolean updateOn = false;
+	
+	URL db;
+	BufferedReader in;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,9 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
 
 		// go = true;
-		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
+		ToggleButton b = (ToggleButton) findViewById(R.id.updateTogglerCox);
 		b.setChecked(false);
-
+		
 		// Acquire a reference to the system Location Manager
 		LocationManager locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
@@ -78,7 +81,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	protected void onStop() {
 		super.onStop();
 
-		updateThread.interrupt();
+		//updateThread.interrupt();
 		guiThread.interrupt();
 	}
 
@@ -117,18 +120,18 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		boolean on = ((ToggleButton) v).isChecked();
 		if (on) {
 			if (go) {
-				updateThread.start();
+				//updateThread.start();
 				guiThread.start();
 			}
-			updateOn = true;
+			//updateOn = true;
 			guiOn = true;
 			go = false;
 		} else {
-			updateOn = false;
+			//updateOn = false;
 			guiOn = false;
 		}
 	}
-
+/*
 	Thread updateThread = new Thread() {
 		public void run() {
 			try {
@@ -176,7 +179,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 			}
 		}
 	};
-
+*/
 	Thread guiThread = new Thread() {
 		public void run() {
 			try {
@@ -187,7 +190,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 						@Override
 						public void run() {
 							if (guiOn) {
-								TextView display = (TextView) findViewById(R.id.tvMeters);
+								display = (TextView) findViewById(R.id.tvMeters);
 								display.setText(myBoat.getMeters() + " m");
 								display = (TextView) findViewById(R.id.tvSplit);
 								display.setText(myBoat.formatSplit(myBoat
@@ -195,9 +198,9 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 								display = (TextView) findViewById(R.id.tvTime);
 								display.setText(myBoat.formatSplit(myBoat
 										.getRawTime()) + "");
-								display = (TextView) findViewById(R.id.tvAvgSplit);
+								/*display = (TextView) findViewById(R.id.tvAvgSplit);
 								display.setText(myBoat.formatSplit(myBoat
-										.getRawAvgSplit()) + " ");
+										.getRawAvgSplit()) + " ");*/
 								display = (TextView) findViewById(R.id.tvRate);
 								display.setText(myBoat.getRate() + "spm");
 							}
@@ -212,7 +215,36 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	public void onLocationChanged(Location loc) {
 		if (loc != null) {
-			this.loc = loc;
+			if (oldLocation == null) {
+				oldLocation = loc;
+				myBoat.setMeters(0);
+			} else {
+				myBoat.setMeters(myBoat.getMeters()
+						+ (int) loc.distanceTo(oldLocation));
+				oldLocation = loc;
+			}
+
+			myBoat.setSplitSeconds(500 / loc.getSpeed());
+			if (myBoat.getRawSplit()>600)
+				myBoat.setSplitSeconds(600);
+
+			try {
+				db = new URL(
+						"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
+								+ "cid=" + myBoat.getCox()
+								+ "&tid=" + myBoat.getTeamId()
+								+ "&spm=" + myBoat.getRate()
+								+ "&mps="
+								+ myBoat.getRawSplit() + "&mt="
+								+ myBoat.getMeters());
+				in = new BufferedReader(new InputStreamReader(
+						db.openStream()));
+				in.readLine();
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
