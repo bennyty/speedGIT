@@ -83,8 +83,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	protected void onStop() {
 		super.onStop();
 
-		updateThread.interrupt();
-		guiThread.interrupt();
+		locationManager.removeUpdates(this);
 	}
 
 	private void showGPSDisabledAlertToUser() {
