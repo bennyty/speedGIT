@@ -72,14 +72,14 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		}
 		
 		updateThread.start();
-		guiThread.start();
+		//guiThread.start();
 
 	}
 
 	protected void onStop() {
 		super.onStop();
 		updateThread.interrupt();
-		guiThread.interrupt();
+		//guiThread.interrupt();
 		locationManager.removeUpdates(this);
 	}
 
@@ -162,7 +162,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		}
 	};
  
-	Thread guiThread = new Thread() {
+	/*Thread guiThread = new Thread() {
 		public void run() {
 			runOnUiThread(new Runnable() {
 				@Override
@@ -185,14 +185,27 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 			});
 			return;
 		}
-	};
+	};*/
 
 	public void onLocationChanged(Location loc) {
 		if (loc != null) {
 			this.loc = loc;
 			
 			updateThread.start();
-			guiThread.start();
+			
+			TextView display = (TextView) findViewById(R.id.tvMeters);
+			display.setText(myBoat.getMeters() + " m");
+			display = (TextView) findViewById(R.id.tvSplit);
+			display.setText(myBoat.formatSplit(myBoat.getRawSplit())
+					+ "");
+			display = (TextView) findViewById(R.id.tvTime);
+			display.setText(myBoat.formatSplit(myBoat.getRawTime())
+					+ "");
+			display = (TextView) findViewById(R.id.tvAvgSplit);
+			display.setText(myBoat.formatSplit(myBoat.getRawAvgSplit())
+					+ " ");
+			display = (TextView) findViewById(R.id.tvRate);
+			display.setText(myBoat.getRate() + "spm");
 		}
 	}
 
