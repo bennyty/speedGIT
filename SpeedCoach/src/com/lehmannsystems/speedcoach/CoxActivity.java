@@ -56,7 +56,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		super.onStart();
 		myBoat = new Boat("Entheos Tester", "Mike", 1);
 
-		//go = true;
+		// go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
 		b.setChecked(false);
 
@@ -141,11 +141,14 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 								oldLocation = loc;
 								myBoat.setMeters(0);
 							} else {
-								myBoat.setMeters(myBoat.getMeters() + (int) loc.distanceTo(oldLocation));
+								myBoat.setMeters(myBoat.getMeters()
+										+ (int) loc.distanceTo(oldLocation));
 								oldLocation = loc;
 							}
 
 							myBoat.setSplitSeconds(500 / loc.getSpeed());
+							if (myBoat.getRawSplit()>600)
+								myBoat.setSplitSeconds(600);
 
 							try {
 								db = new URL(
