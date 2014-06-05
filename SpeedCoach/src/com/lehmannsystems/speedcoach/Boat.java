@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 import org.json.JSONObject;
+
+import android.util.Log;
 
 public class Boat {
 	private String name;
@@ -16,11 +19,11 @@ public class Boat {
 	private double splitSeconds;
 	private int time;
 	private int meters;
+	@SuppressWarnings("unused")
 	private String regatta;
-	private int avgCount;
-	private double avgTotalSplit;
+	private double totalSplit;
 	
-	public Boat (String n, String c, int i){
+	public Boat (String n, String c, int i) {
 		name = n;
 		cox = c;
 		teamId = i;
@@ -62,25 +65,22 @@ public class Boat {
 		    	splitSeconds = 500 / json.getDouble("mtpersec");
 		    	if (splitSeconds>600)
 		    		splitSeconds = 600;
-		    	avgTotalSplit += splitSeconds;
+		    	totalSplit += splitSeconds;
 		    } else {
-		    	rate = -1;
-		    	meters = -1;
-		    	splitSeconds = -1;
-		    	avgTotalSplit += -1;
+		    	System.out.println("Cox/Team ID Mismatch");
 		    }
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		avgCount++;
 	}
 	
 	public void reset() {
 		time = 0;
 		meters = 0;
-		avgCount = 0;
-		time = 0;
+		rate = 0;
+		totalSplit = 0;
+		
 	}
 	
 	public String getName() {
@@ -93,6 +93,8 @@ public class Boat {
 	
 	public double getRate() {
 		//update(cox, teamId);
+		Random r = new Random();
+		rate = r.nextInt(40);
 		return rate;
 	}
 	
@@ -102,7 +104,7 @@ public class Boat {
 	}
 	
 	public double getRawAvgSplit() {
-		double a = avgTotalSplit/avgCount;
+		double a = totalSplit/time;
 		return a;
 	}
 	
@@ -160,5 +162,13 @@ public class Boat {
 	 */
 	public void setMeters(int meters) {
 		this.meters = meters;
+	}
+
+	public double getTotalSplit() {
+		return totalSplit;
+	}
+
+	public void setTotalSplit(double totalSplit) {
+		this.totalSplit = totalSplit;
 	}
 }

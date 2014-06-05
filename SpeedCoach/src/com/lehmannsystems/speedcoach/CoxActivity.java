@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,14 +72,14 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 			showGPSDisabledAlertToUser();
 		}
 		
-		updateThread.start();
+		//updateThread.start();
 		//guiThread.start();
 
 	}
 
 	protected void onStop() {
 		super.onStop();
-		updateThread.interrupt();
+		//updateThread.interrupt();
 		//guiThread.interrupt();
 		locationManager.removeUpdates(this);
 	}
@@ -123,44 +124,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		}
 	}
 
-	Thread updateThread = new Thread() {
-		public void run() {
-			URL db;
-			BufferedReader in;
-			if (loc != null) {
-				if (oldLocation == null) {
-					oldLocation = loc;
-					myBoat.setMeters(0);
-				} else {
-					myBoat.setMeters(myBoat.getMeters()
-							+ (int) loc.distanceTo(oldLocation));
-					oldLocation = loc;
-				}
-
-				myBoat.setSplitSeconds(500 / loc.getSpeed());
-				if (myBoat.getRawSplit() > 600)
-					myBoat.setSplitSeconds(600);
-
-				try {
-					db = new URL(
-							"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
-									+ "cid=" + myBoat.getCox() + "&tid="
-									+ myBoat.getTeamId() + "&spm="
-									+ myBoat.getRate() + "&mps="
-									+ myBoat.getRawSplit() + "&mt="
-									+ myBoat.getMeters());
-					in = new BufferedReader(new InputStreamReader(
-							db.openStream()));
-					in.readLine();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			return;
-		}
-	};
+	
  
 	/*Thread guiThread = new Thread() {
 		public void run() {
@@ -187,12 +151,57 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 		}
 	};*/
 
-	public void onLocationChanged(Location loc) {
+	public void onLocationChanged(final Location loc) {
 		if (loc != null) {
 			this.loc = loc;
+			//updateThread
 			
-			updateThread.start();
+			new Thread() {
+				public void run() {
+					URL db;
+					BufferedReader in;
+					if (loc != null) {
+						if (oldLocation == null) {
+							oldLocation = loc;
+							myBoat.setMeters(0);
+						} else {
+							myBoat.setMeters(myBoat.getMeters()
+									+ (int) loc.distanceTo(oldLocation));
+							oldLocation = loc;
+						}
+						float s = loc.getSpeed();
+						//Log.d(LOCATION_SERVICE,s+"");
+						
+						myBoat.setSplitSeconds(500 / s);
+						if (myBoat.getRawSplit() > 600)
+							myBoat.setSplitSeconds(600);
+						
+						myBoat.setTotalSplit(myBoat.getTotalSplit() + myBoat.getRawSplit());
+						
+						try {
+							db = new URL(
+									"http://www.getgreenrain.com/RowSplit/storeSplit.php?"
+											+ "cid=" + myBoat.getCox() + "&tid="
+											+ myBoat.getTeamId() + "&spm="
+											+ myBoat.getRate() + "&mps="
+											+ s + "&mt="
+											+ myBoat.getMeters());
+							in = new BufferedReader(new InputStreamReader(
+									db.openStream()));
+							in.readLine();
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+						myBoat.updateTime();
+					}
+					return;
+				}
+			}.start();
 			
+			//guiThread
 			TextView display = (TextView) findViewById(R.id.tvMeters);
 			display.setText(myBoat.getMeters() + " m");
 			display = (TextView) findViewById(R.id.tvSplit);
