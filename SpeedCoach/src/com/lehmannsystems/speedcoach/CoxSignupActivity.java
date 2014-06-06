@@ -1,5 +1,12 @@
 package com.lehmannsystems.speedcoach;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -26,8 +33,7 @@ public class CoxSignupActivity extends Activity {
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
 	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+	private ArrayList<String> TEAM_NAMES = new ArrayList<String>();
 
 	/**
 	 * The default email to populate the email field with.
@@ -40,12 +46,15 @@ public class CoxSignupActivity extends Activity {
 	private UserLoginTask mAuthTask = null;
 
 	// Values for email and password at the time of the login attempt.
-	private String mEmail;
-	private String mPassword;
+	private String mName;
+	private String mTeam;
+	
+	private String cName;
+	private String cTeamId;
 
 	// UI references.
-	private EditText mEmailView;
-	private EditText mPasswordView;
+	private EditText mNameView;
+	private EditText mTeamView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
@@ -58,13 +67,12 @@ public class CoxSignupActivity extends Activity {
 		setupActionBar();
 
 		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.etCoxName);
-		mEmailView.setText(mEmail);
+		mName = getIntent().getStringExtra(EXTRA_EMAIL);
+		mNameView = (EditText) findViewById(R.id.etCoxName);
+		mNameView.setText(mName);
 
-		mPasswordView = (EditText) findViewById(R.id.spinnerCoxTeam);
-		mPasswordView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+		mTeamView = (EditText) findViewById(R.id.etCoxTeam);
+		mTeamView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView textView, int id,
 							KeyEvent keyEvent) {
@@ -137,37 +145,37 @@ public class CoxSignupActivity extends Activity {
 		}
 
 		// Reset errors.
-		mEmailView.setError(null);
-		mPasswordView.setError(null);
+		mNameView.setError(null);
+		mTeamView.setError(null);
 
 		// Store values at the time of the login attempt.
-		mEmail = mEmailView.getText().toString();
-		mPassword = mPasswordView.getText().toString();
+		mName = mNameView.getText().toString();
+		mTeam = mTeamView.getText().toString();
 
 		boolean cancel = false;
 		View focusView = null;
 
-		// Check for a valid password.
-		if (TextUtils.isEmpty(mPassword)) {
-			mPasswordView.setError(getString(R.string.error_field_required));
-			focusView = mPasswordView;
+		// Check for a valid team.
+		if (TextUtils.isEmpty(mTeam)) {
+			mTeamView.setError(getString(R.string.error_field_required));
+			focusView = mTeamView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
+		} /*else if (mPassword.length() < 4) {
+			mTeamView.setError(getString(R.string.error_invalid_password));
+			focusView = mTeamView;
 			cancel = true;
-		}
+		}*/
 
-		// Check for a valid email address.
-		if (TextUtils.isEmpty(mEmail)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
+		// Check for a valid name.
+		if (TextUtils.isEmpty(mName)) {
+			mNameView.setError(getString(R.string.error_field_required));
+			focusView = mNameView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
+		} /*else if (!mName.contains("@")) {
+			mNameView.setError(getString(R.string.error_invalid_email));
+			focusView = mNameView;
 			cancel = true;
-		}
+		}*/
 
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
@@ -228,25 +236,50 @@ public class CoxSignupActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
+	public class getTeamNames extends AsyncTask<Void, Void, String[]> {
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			URL db;
+			try {
+				db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
+				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
+				
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+	}
+	
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+			URL db;
+			BufferedReader in;
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+				// Network access
+				db = new URL("http://getgreenrain.com/RowSplit/insertCoxin.php?tid=" + cTeamId + "&name=" + cName);
+				in = new BufferedReader(new InputStreamReader(
+						db.openStream()));
+				in.readLine();
+				in.close();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				return false;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				return false;
 			}
 
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}
+			
 
 			// TODO: register the new account here.
 			return true;
@@ -260,9 +293,10 @@ public class CoxSignupActivity extends Activity {
 			if (success) {
 				finish();
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
+				//mTeamView.setError(getString(R.string.error_field_required));
+				mTeamView.setError("Error connecting to the database.");
+				//TODO May be incorrect ^^
+				mTeamView.requestFocus();
 			}
 		}
 

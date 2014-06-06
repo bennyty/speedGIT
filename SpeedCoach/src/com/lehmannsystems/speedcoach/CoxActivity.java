@@ -189,6 +189,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 							in = new BufferedReader(new InputStreamReader(
 									db.openStream()));
 							in.readLine();
+							in.close();
 						} catch (MalformedURLException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
