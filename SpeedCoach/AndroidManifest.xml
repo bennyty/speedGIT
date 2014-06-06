@@ -28,27 +28,36 @@
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.CoxActivity"
-            android:label="@string/title_activity_cox" 
-            android:theme="@style/CoxTheme"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_cox"
+            android:screenOrientation="portrait"
+            android:theme="@style/CoxTheme" >
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.CoachActivity"
             android:label="@string/title_activity_coach"
-            android:theme="@style/CoachTheme"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/CoachTheme" >
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.RegattaViewFullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_regatta_view_fullscreen"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.lehmannsystems.speedcoach.WhoAreYouActivity"
             android:label="@string/title_activity_who_are_you"
             android:theme="@style/WhoTheme" >
+        </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.CoxSignupActivity"
+            android:label="@string/title_activity_cox_signup"
+            android:parentActivityName="com.lehmannsystems.speedcoach.WhoAreYouActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lehmannsystems.speedcoach.WhoAreYouActivity" />
         </activity>
     </application>
 

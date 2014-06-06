@@ -3,13 +3,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -34,56 +34,56 @@
     </style>
 
     <style name="ButtonBarButton" />
-    
+
     <style name="CoachTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/CoachActionBar</item>
     </style>
-    
+
     <style name="CoachActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/coach_bar</item>
         <item name="android:titleTextStyle">@style/CoachTitleText</item>
     </style>
-    
-    <style name="CoachTitleText"
-           parent="@android:style/Widget.Holo.Light.ActionBar">
+
+    <style name="CoachTitleText" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:textColor">@color/coach_title</item>
         <item name="android:textSize">17sp</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
-    
+
     <style name="CoxTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/CoxActionBar</item>
     </style>
-    
+
     <style name="CoxActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/cox_bar</item>
         <item name="android:titleTextStyle">@style/CoxTitleText</item>
     </style>
-    
-    <style name="CoxTitleText"
-           parent="@android:style/Widget.Holo.Light.ActionBar">
+
+    <style name="CoxTitleText" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:textColor">@color/cox_title</item>
         <item name="android:textSize">17sp</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
-    
+
     <style name="WhoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/WhoActionBar</item>
     </style>
-    
+
     <style name="WhoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/viewer_bar</item>
         <item name="android:titleTextStyle">@style/WhoTitleText</item>
     </style>
-    
-    <style name="WhoTitleText"
-           parent="@android:style/Widget.Holo.Light.ActionBar">
+
+    <style name="WhoTitleText" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:textColor">@color/viewer_title</item>
         <item name="android:textSize">17sp</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
-    
-    
 
-    
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
 </resources>
