@@ -57,11 +57,6 @@ public class MainActivity extends ActionBarActivity {
 	    			intent = new Intent(this, CoxActivity.class);
 					startActivity(intent);
 				break;
-	    		case (2):
-	    			intent = new Intent(this, RegattaViewFullscreenActivity.class);
-	    			startActivity(intent);
-	    		break;
-	    		
 	    	}
 	    }
 	}

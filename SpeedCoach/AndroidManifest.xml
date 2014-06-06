@@ -39,13 +39,6 @@
             android:theme="@style/CoachTheme" >
         </activity>
         <activity
-            android:name="com.lehmannsystems.speedcoach.RegattaViewFullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_regatta_view_fullscreen"
-            android:screenOrientation="portrait"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
             android:name="com.lehmannsystems.speedcoach.WhoAreYouActivity"
             android:label="@string/title_activity_who_are_you"
             android:theme="@style/WhoTheme" >

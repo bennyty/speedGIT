@@ -32,12 +32,7 @@ public class WhoAreYouActivity extends ActionBarActivity {
 				intent = new Intent(this, CoxActivity.class);
 				startActivity(intent);
 			break;
-			case (R.id.SelectViewer):
-				prefEditor.putInt("type", 2);
-				prefEditor.commit();
-				intent = new Intent(this, RegattaViewFullscreenActivity.class);
-				startActivity(intent);
-			break;
+			
 		}
 		
 	}

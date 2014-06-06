@@ -36,14 +36,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.lehmannsystems.basicspeedcoach.MainActivity$PlaceholderFragment" >
 
-        <Button
-            android:id="@+id/SelectViewer"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/toggle_blue"
-            android:onClick="setPersonType"
-            android:text="@string/viewer_Label"
-            android:textColor="@color/coach_title" />
 
         <Button
             android:id="@+id/SelectCoxswain"
