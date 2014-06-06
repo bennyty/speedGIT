@@ -58,6 +58,9 @@ public class CoxSignupActivity extends Activity {
 	private String mTeam;
 	
 	private String cTeamId;
+	
+/*	private boolean isLoaded = false;
+	private boolean onCreateLooper = false;*/
 
 	// UI references.
 	private EditText mNameView;
@@ -68,6 +71,8 @@ public class CoxSignupActivity extends Activity {
 	
 	private Intent intent;
 	Context context;
+	
+	ArrayAdapter<String> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +87,25 @@ public class CoxSignupActivity extends Activity {
 		mName = getIntent().getStringExtra(EXTRA_EMAIL);
 		mNameView = (EditText) findViewById(R.id.etCoxName);
 		mNameView.setText(mName);
-
+		
 		context = getBaseContext();
+
+		/*while (!onCreateLooper) {
+			if (isLoaded) {
+				adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, teamNames);
+			} else {
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}*/
+		
 		
 		mTeamView = (AutoCompleteTextView) findViewById(R.id.etCoxTeam);
-		
-		mGetTeamTask = new getTeamNames();
-		mGetTeamTask.execute((Void) null);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                android.R.layout.simple_dropdown_item_1line, teamNames);
-        
-		mTeamView.setAdapter(adapter);
+		mTeamView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line));
 		mTeamView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView textView, int id,
@@ -105,6 +117,9 @@ public class CoxSignupActivity extends Activity {
 						return false;
 					}
 				});
+		
+		mGetTeamTask = new getTeamNames();
+		mGetTeamTask.execute((Void) null);
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
@@ -270,13 +285,12 @@ public class CoxSignupActivity extends Activity {
 				teamNames = new String[json.length()];
 				for (int i = 0; i < json.length(); i++) {
 					JSONObject jo = json.getJSONObject(i);
-					
 					String n = jo.getString("name");
-					
 					String joId = jo.getString("id");
 					
 					teamNamesWithId.put(n, Integer.valueOf(joId));
 					teamNames[i] = n;
+					//adapter.add(n);
 				}
 			} /*catch (Exception e) {
 				e.printStackTrace();
@@ -292,15 +306,17 @@ public class CoxSignupActivity extends Activity {
 				return false;
 			}
 			
+			//isLoaded = true;
 			return true;
 		}
 		
 		@Override
 		protected void onPostExecute(final Boolean success) {
-			//mGetTeamTask = null;
+			mGetTeamTask = null;
 			//showProgress(false);
 
 			if (success) {
+				mTeamView.setAdapter(new ArrayAdapter<String>(CoxSignupActivity.this, android.R.layout.simple_dropdown_item_1line, teamNames));
 				finish();
 			} else {
 				//mTeamView.setError(getString(R.string.error_field_required));
@@ -312,7 +328,7 @@ public class CoxSignupActivity extends Activity {
 
 		@Override
 		protected void onCancelled() {
-			//mGetTeamTask = null;
+			mGetTeamTask = null;
 			//showProgress(false);
 		}
 		
