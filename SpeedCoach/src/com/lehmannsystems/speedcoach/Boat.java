@@ -92,9 +92,9 @@ public class Boat {
 	}
 	
 	public double getRate() {
-		//update(cox, teamId);
-		Random r = new Random();
-		rate = r.nextInt(40);
+		update(cox, teamId);
+		//Random r = new Random();
+		//rate = r.nextInt(40);
 		return rate;
 	}
 	
