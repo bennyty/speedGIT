@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,6 +15,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +25,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.MenuItem;
@@ -37,7 +42,7 @@ public class CoxSignupActivity extends Activity {
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private String[] teamNames;
-	private String[][] teamNamesWithId;
+	private HashMap<String, Integer> teamNamesWithId;
 
 	/**
 	 * The default email to populate the email field with.
@@ -57,10 +62,13 @@ public class CoxSignupActivity extends Activity {
 
 	// UI references.
 	private EditText mNameView;
-	private EditText mTeamView;
+	private AutoCompleteTextView mTeamView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	
+	private Intent intent;
+	Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +82,12 @@ public class CoxSignupActivity extends Activity {
 		mNameView = (EditText) findViewById(R.id.etCoxName);
 		mNameView.setText(mName);
 
-		mTeamView = (EditText) findViewById(R.id.etCoxTeam);
+		mTeamView = (AutoCompleteTextView) findViewById(R.id.etCoxTeam);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, teamNames);
+        
+		mTeamView.setAdapter(adapter);
 		mTeamView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView textView, int id,
@@ -247,12 +260,12 @@ public class CoxSignupActivity extends Activity {
 				URL db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
 				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
 				String inputLine = in.readLine();
-				JSONArray json = new JSONArray(inputLine.substring(1, inputLine.length()-1));
+				JSONArray json = new JSONArray(inputLine); //.substring(1, inputLine.length()-1)
 				for (int i = 0; i < json.length(); i++) {
 					JSONObject jo = json.getJSONObject(i);
-					teamNamesWithId[0][i] = jo.getString("id");
-					teamNamesWithId[1][i] = jo.getString("name");
-					teamNames[i] = jo.getString("name");
+					String n = jo.getString("name");
+					teamNamesWithId.put(n, Integer.valueOf(jo.getString("id")));
+					teamNames[i] = n;
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -270,12 +283,10 @@ public class CoxSignupActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			String s = "HI";
-			for(int i = 0; i < teamNamesWithId.length;i++)
-			{
-				if(mTeam.equals(s))
+			for (String key : teamNamesWithId.keySet()) {
+				if(mTeam.equals(key))
 				{
-					cTeamId = teamNamesWithId[0][i];
+					cTeamId = teamNamesWithId.get(key).toString();
 				}
 			}
 			
@@ -295,10 +306,8 @@ public class CoxSignupActivity extends Activity {
 				// TODO Auto-generated catch block
 				return false;
 			}
-
 			
-
-			// TODO: register the new account here.
+			
 			return true;
 		}
 
@@ -308,6 +317,8 @@ public class CoxSignupActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+				intent = new Intent(context, CoxActivity.class);
+				startActivity(intent);
 				finish();
 			} else {
 				//mTeamView.setError(getString(R.string.error_field_required));

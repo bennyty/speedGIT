@@ -29,7 +29,7 @@ public class WhoAreYouActivity extends ActionBarActivity {
 			case (R.id.SelectCoxswain):
 				prefEditor.putInt("type", 1);
 				prefEditor.commit();
-				intent = new Intent(this, CoxActivity.class);
+				intent = new Intent(this, CoxSignupActivity.class);
 				startActivity(intent);
 			break;
 			
