@@ -27,11 +27,13 @@
     <color name="black_overlay">#66000000</color>
     <color name="coach_bar">#EF4424</color>
     <color name="coach_title">#FFFFFFFF</color>
+    <color name="coach_bg">#F8E0E0</color>
     
     <color name="cox_bar">#38B449</color>
     <color name="cox_title">#FFFFFFFF</color>
+    <color name="cox_bg">#E0F8E0</color>
     
     <color name="viewer_bar">#41B7EA</color>
     <color name="viewer_title">#FFFFFFFF</color>
-
+	<color name="viewer_bg">#E0E6F8</color>
 </resources>

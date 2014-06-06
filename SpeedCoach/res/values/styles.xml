@@ -37,6 +37,8 @@
 
     <style name="CoachTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/CoachActionBar</item>
+        <item name="android:windowBackground">@color/coach_bg</item>
+        
     </style>
 
     <style name="CoachActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -52,6 +54,7 @@
 
     <style name="CoxTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/CoxActionBar</item>
+        <item name="android:windowBackground">@color/cox_bg</item>
     </style>
 
     <style name="CoxActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -67,6 +70,8 @@
 
     <style name="WhoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/WhoActionBar</item>
+        <item name="android:windowBackground">@color/viewer_bg</item>
+        
     </style>
 
     <style name="WhoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">

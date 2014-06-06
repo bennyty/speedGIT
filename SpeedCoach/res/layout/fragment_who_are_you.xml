@@ -40,7 +40,7 @@
             android:id="@+id/SelectViewer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/spectator"
+            android:background="@drawable/toggle_blue"
             android:onClick="setPersonType"
             android:text="@string/viewer_Label"
             android:textColor="@color/coach_title" />
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/start"
+            android:background="@drawable/toggle_green"
             android:onClick="setPersonType"
             android:textColor="@color/cox_title"
             android:text="@string/coxswain_Label" />
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/stop"
+            android:background="@drawable/toggle_red"
             android:onClick="setPersonType"
             android:textColor="@color/coach_title"
             android:text="@string/coach_Label" />
