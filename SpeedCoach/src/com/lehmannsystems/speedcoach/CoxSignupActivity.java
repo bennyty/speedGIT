@@ -21,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -37,22 +38,20 @@ import android.support.v4.app.NavUtils;
  * well.
  */
 public class CoxSignupActivity extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private String[] teamNames;
-	private HashMap<String, Integer> teamNamesWithId;
+	
+	String[] teamNames;
+	HashMap<String, Integer> teamNamesWithId;
 
 	/**
 	 * The default email to populate the email field with.
 	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	public static final String EXTRA_EMAIL = "I DONT KNOW WHAT THIS IS";
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 	private UserLoginTask mAuthTask = null;
+	private getTeamNames mGetTeamTask = null;
 
 	// Values for email and password at the time of the login attempt.
 	private String mName;
@@ -76,15 +75,22 @@ public class CoxSignupActivity extends Activity {
 
 		setContentView(R.layout.activity_cox_signup);
 		setupActionBar();
+		
+		teamNamesWithId = new HashMap<String, Integer>();
 
 		// Set up the login form.
 		mName = getIntent().getStringExtra(EXTRA_EMAIL);
 		mNameView = (EditText) findViewById(R.id.etCoxName);
 		mNameView.setText(mName);
 
+		context = getBaseContext();
+		
 		mTeamView = (AutoCompleteTextView) findViewById(R.id.etCoxTeam);
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		mGetTeamTask = new getTeamNames();
+		mGetTeamTask.execute((Void) null);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_dropdown_item_1line, teamNames);
         
 		mTeamView.setAdapter(adapter);
@@ -252,30 +258,62 @@ public class CoxSignupActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class getTeamNames extends AsyncTask<Void, Void, String[]> {
+	public class getTeamNames extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
-		protected String[] doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			try {
 				URL db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
 				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
 				String inputLine = in.readLine();
 				JSONArray json = new JSONArray(inputLine); //.substring(1, inputLine.length()-1)
+				teamNames = new String[json.length()];
 				for (int i = 0; i < json.length(); i++) {
 					JSONObject jo = json.getJSONObject(i);
+					
 					String n = jo.getString("name");
-					teamNamesWithId.put(n, Integer.valueOf(jo.getString("id")));
+					
+					String joId = jo.getString("id");
+					
+					teamNamesWithId.put(n, Integer.valueOf(joId));
 					teamNames[i] = n;
 				}
-			} catch (MalformedURLException e) {
+			} /*catch (Exception e) {
+				e.printStackTrace();
+			}*/
+			
+			 catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
 			
-			return null;
+			return true;
+		}
+		
+		@Override
+		protected void onPostExecute(final Boolean success) {
+			//mGetTeamTask = null;
+			//showProgress(false);
+
+			if (success) {
+				finish();
+			} else {
+				//mTeamView.setError(getString(R.string.error_field_required));
+				mTeamView.setError("Error connecting to the database.");
+				//TODO May be incorrect ^^
+				mTeamView.requestFocus();
+			}
+		}
+
+		@Override
+		protected void onCancelled() {
+			//mGetTeamTask = null;
+			//showProgress(false);
 		}
 		
 	}
@@ -317,8 +355,8 @@ public class CoxSignupActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				intent = new Intent(context, CoxActivity.class);
-				startActivity(intent);
+				//intent = new Intent(context, CoxActivity.class);
+				//startActivity(intent);
 				finish();
 			} else {
 				//mTeamView.setError(getString(R.string.error_field_required));
