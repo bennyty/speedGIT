@@ -7,6 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -33,7 +36,8 @@ public class CoxSignupActivity extends Activity {
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
 	 */
-	private ArrayList<String> TEAM_NAMES = new ArrayList<String>();
+	private String[] teamNames;
+	private String[][] teamNamesWithId;
 
 	/**
 	 * The default email to populate the email field with.
@@ -49,7 +53,6 @@ public class CoxSignupActivity extends Activity {
 	private String mName;
 	private String mTeam;
 	
-	private String cName;
 	private String cTeamId;
 
 	// UI references.
@@ -240,12 +243,17 @@ public class CoxSignupActivity extends Activity {
 
 		@Override
 		protected String[] doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			URL db;
 			try {
-				db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
+				URL db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
 				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
-				
+				String inputLine = in.readLine();
+				JSONArray json = new JSONArray(inputLine.substring(1, inputLine.length()-1));
+				for (int i = 0; i < json.length(); i++) {
+					JSONObject jo = json.getJSONObject(i);
+					teamNamesWithId[0][i] = jo.getString("id");
+					teamNamesWithId[1][i] = jo.getString("name");
+					teamNames[i] = jo.getString("name");
+				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -262,11 +270,20 @@ public class CoxSignupActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			String s = "HI";
+			for(int i = 0; i < teamNamesWithId.length;i++)
+			{
+				if(mTeam.equals(s))
+				{
+					cTeamId = teamNamesWithId[0][i];
+				}
+			}
+			
 			URL db;
 			BufferedReader in;
 			try {
 				// Network access
-				db = new URL("http://getgreenrain.com/RowSplit/insertCoxin.php?tid=" + cTeamId + "&name=" + cName);
+				db = new URL("http://getgreenrain.com/RowSplit/insertCoxin.php?tid=" + cTeamId + "&name=" + mName);
 				in = new BufferedReader(new InputStreamReader(
 						db.openStream()));
 				in.readLine();
