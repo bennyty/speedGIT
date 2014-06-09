@@ -20,8 +20,8 @@ import java.util.TimerTask;
 
 public class CoachActivity extends ActionBarActivity {
 
-	Boat boatA = new Boat("Entheos", "Ben", 1);
-	Boat boatB = new Boat("First Four", "Mike", 1);
+	Boat boatA;
+	Boat boatB;
 	String coxA = "Ready";
 	String coxB = "Ready";
 	String splitA = "0:00.0";
@@ -122,6 +122,8 @@ public class CoachActivity extends ActionBarActivity {
 		super.onStart();
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateToggler);
 		b.setChecked(false);
+		boatA = new Boat(prefs.getString("CoxAName", "Set Cox A"), prefs.getInt("CoxATeam", -1));
+		boatB = new Boat(prefs.getString("CoxBName", "Set Cox B"), prefs.getInt("CoxBTeam", -1));
 	}
 	
 	public void toggle(View v) {
