@@ -292,11 +292,11 @@ public class CoxSignupActivity extends Activity {
 					teamNames[i] = n;
 					//adapter.add(n);
 				}
-			} /*catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			}*/
+			}
 			
-			 catch (MalformedURLException e) {
+			 /*catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
@@ -304,7 +304,7 @@ public class CoxSignupActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
-			}
+			}*/
 			
 			//isLoaded = true;
 			return true;
@@ -312,7 +312,7 @@ public class CoxSignupActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(final Boolean success) {
-			mGetTeamTask = null;
+			//mGetTeamTask = null;
 			//showProgress(false);
 
 			if (success) {
@@ -328,7 +328,7 @@ public class CoxSignupActivity extends Activity {
 
 		@Override
 		protected void onCancelled() {
-			mGetTeamTask = null;
+			//mGetTeamTask = null;
 			//showProgress(false);
 		}
 		
