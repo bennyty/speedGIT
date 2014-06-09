@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Random;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class Boat {
-	private String name;
 	private String cox;
 	private int teamId;
 	private double rate;
@@ -23,16 +19,14 @@ public class Boat {
 	private String regatta;
 	private double totalSplit;
 	
-	public Boat (String n, String c, int i) {
-		name = n;
+	public Boat (String c, int i) {
 		cox = c;
 		teamId = i;
 		time = 0;
 		regatta = null;
 	}
 	
-	public Boat (String n, String c, int i, String r){
-		name = n;
+	public Boat (String c, int i, String r){
 		cox = c;
 		teamId = i;
 		time = 0;
@@ -72,6 +66,9 @@ public class Boat {
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -81,10 +78,6 @@ public class Boat {
 		rate = 0;
 		totalSplit = 0;
 		
-	}
-	
-	public String getName() {
-		return name;
 	}
 	
 	public String getCox() {

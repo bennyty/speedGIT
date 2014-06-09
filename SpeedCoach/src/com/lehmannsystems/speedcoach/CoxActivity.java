@@ -53,7 +53,7 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 	protected void onStart() {
 		super.onStart();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		myBoat = new Boat("Hi", prefs.getString("coxName", null), prefs.getInt("coxTeam", -1));
+		myBoat = new Boat(prefs.getString("coxName", null), prefs.getInt("coxTeam", -1));
 
 		// go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateTogglerCox);
