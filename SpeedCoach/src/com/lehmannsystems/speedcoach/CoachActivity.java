@@ -208,7 +208,7 @@ public class CoachActivity extends ActionBarActivity {
 	            addBoatB();
 	            return true;
 	        case R.id.change_view:
-	        	intent = new Intent(this, WhoAreYouActivity.class);
+	        	intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
 	            return true;
 	        default:

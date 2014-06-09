@@ -75,7 +75,7 @@ public class CoxSignupActivity extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(CoxSignupActivity.this);
 		
 		if (prefs.contains("coxName") && prefs.contains("coxTeam")) {
-			Intent intent = new Intent(this, WhoAreYouActivity.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 		}
 		
