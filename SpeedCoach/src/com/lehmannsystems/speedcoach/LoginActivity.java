@@ -98,6 +98,7 @@ public class LoginActivity extends Activity {
 				});
 		
 		teamNames = new ArrayList<String>();
+		teamNamesWithId = new HashMap<String, Integer>();
 		
 		new getTeamNames().execute((Void) null);
 	}
@@ -234,6 +235,7 @@ public class LoginActivity extends Activity {
 				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
 				String inputLine = in.readLine();
 				JSONArray json = new JSONArray(inputLine); //.substring(1, inputLine.length()-1)
+				in.close();
 				for (int i = 0; i < json.length(); i++) {
 					JSONObject jo = json.getJSONObject(i);
 					String n = jo.getString("name");
