@@ -1,4 +1,4 @@
-/*package com.lehmannsystems.speedcoach;
+package com.lehmannsystems.speedcoach;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -99,9 +99,9 @@ public class WhoAreYouActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	*//**
+	/**
 	 * A placeholder fragment containing a simple view.
-	 *//*
+	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -117,4 +117,3 @@ public class WhoAreYouActivity extends ActionBarActivity {
 	}
 
 }
-*/
