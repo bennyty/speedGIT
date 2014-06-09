@@ -60,15 +60,25 @@ public class CoxSignupActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 
+	String cTeamId;
 	List<String> teamNames;
 	HashMap<String, Integer> teamNamesWithId;
+	
+	SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_cox_signup);
-
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(CoxSignupActivity.this);
+		
+		if (prefs.contains("coxName") && prefs.contains("coxTeam")) {
+			Intent intent = new Intent(this, WhoAreYouActivity.class);
+			startActivity(intent);
+		}
+		
 		// Set up the login form.
 		mName = getIntent().getStringExtra(EXTRA_EMAIL);
 		mNameView = (EditText) findViewById(R.id.etCoxName);
@@ -271,7 +281,7 @@ public class CoxSignupActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			String cTeamId = null;
+			cTeamId = null;
 			for (String key : teamNamesWithId.keySet()) {
 				if (mTeam.equals(key)) {
 					cTeamId = teamNamesWithId.get(key).toString();
@@ -304,9 +314,10 @@ public class CoxSignupActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 			if (success) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(CoxSignupActivity.this);
+				
 				SharedPreferences.Editor prefEditor = prefs.edit();
 				prefEditor.putString("coxName", mName);
+				prefEditor.putInt("coxTeam", Integer.valueOf(cTeamId));
 				prefEditor.commit();
 				Intent intent = new Intent(CoxSignupActivity.this, CoxActivity.class);
 				startActivity(intent);

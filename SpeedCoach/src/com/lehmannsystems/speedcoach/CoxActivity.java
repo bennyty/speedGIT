@@ -10,12 +10,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +52,8 @@ public class CoxActivity extends ActionBarActivity implements GPSInterface {
 
 	protected void onStart() {
 		super.onStart();
-		myBoat = new Boat("Entheos Tester", "Mike", 1);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		myBoat = new Boat("Hi", prefs.getString("coxName", null), prefs.getInt("coxTeam", -1));
 
 		// go = true;
 		ToggleButton b = (ToggleButton) findViewById(R.id.updateTogglerCox);

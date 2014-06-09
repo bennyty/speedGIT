@@ -49,13 +49,8 @@
                 android:value="com.lehmannsystems.speedcoach.WhoAreYouActivity" />
         </activity>
         <activity
-            android:name="com.lehmannsystems.speedcoach.LoginActivity"
-            android:label="@string/title_activity_cox_signup"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
             android:name="com.lehmannsystems.speedcoach.CoachLoginActivity"
-            android:label="@string/title_activity_coach_login"
+            android:label="@string/title_activity_coach_signup"
             android:parentActivityName="com.lehmannsystems.speedcoach.WhoAreYouActivity"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>

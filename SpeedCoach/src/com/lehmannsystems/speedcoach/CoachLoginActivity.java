@@ -46,7 +46,7 @@ public class CoachLoginActivity extends Activity {
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 	private UserLoginTask mAuthTask = null;
-
+	
 	// Values for email and password at the time of the login attempt.
 	private String mName;
 	private String mTeam;
