@@ -59,8 +59,8 @@ public class CoxSignupActivity extends Activity {
 	
 	private String cTeamId;
 	
-/*	private boolean isLoaded = false;
-	private boolean onCreateLooper = false;*/
+	private boolean isLoaded = false;
+	private boolean onCreateLooper = false;
 
 	// UI references.
 	private EditText mNameView;
@@ -90,9 +90,10 @@ public class CoxSignupActivity extends Activity {
 		
 		context = getBaseContext();
 
-		/*while (!onCreateLooper) {
+		while (!onCreateLooper) {
 			if (isLoaded) {
 				adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, teamNames);
+				onCreateLooper = true;
 			} else {
 				try {
 					Thread.sleep(200);
@@ -101,11 +102,12 @@ public class CoxSignupActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		}*/
+		}
 		
 		
 		mTeamView = (AutoCompleteTextView) findViewById(R.id.etCoxTeam);
-		mTeamView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line));
+		//mTeamView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line));
+		mTeamView.setAdapter(adapter);
 		mTeamView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView textView, int id,
@@ -317,6 +319,7 @@ public class CoxSignupActivity extends Activity {
 
 			if (success) {
 				mTeamView.setAdapter(new ArrayAdapter<String>(CoxSignupActivity.this, android.R.layout.simple_dropdown_item_1line, teamNames));
+				isLoaded = true;
 				finish();
 			} else {
 				//mTeamView.setError(getString(R.string.error_field_required));
