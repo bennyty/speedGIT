@@ -1,4 +1,4 @@
-/*package com.lehmannsystems.speedcoach;
+package com.lehmannsystems.speedcoach;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -80,16 +80,10 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	Not used (static references are too hard)
-	public void toastMe(String msg) {
-		Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-    	toast.show();
-	}
 	
-	*//**
+	/**
 	 * A placeholder fragment containing a simple view.
-	 *//*
+	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -105,4 +99,3 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 }
-*/
