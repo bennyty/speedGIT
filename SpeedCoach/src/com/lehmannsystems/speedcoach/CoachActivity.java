@@ -4,7 +4,9 @@ package com.lehmannsystems.speedcoach;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +34,7 @@ public class CoachActivity extends ActionBarActivity {
 	String avgSplitB = "0:00.0";
 	String totalTime = "0:00.0";
 	Intent intent;
+	SharedPreferences prefs;
 	boolean on = false;
 	boolean go = true;
 	boolean guiOn = false;
@@ -180,6 +183,7 @@ public class CoachActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_coach);
+		prefs = PreferenceManager.getDefaultSharedPreferences(CoachActivity.this);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -233,13 +237,15 @@ public class CoachActivity extends ActionBarActivity {
 	}
 	
 	private void addBoatA() {
-		// TODO Auto-generated method stub
-		
+		SharedPreferences.Editor prefEditor = prefs.edit();
+		prefEditor.putBoolean("ab", true);		
+		prefEditor.commit();
 	}
 
 	private void addBoatB() {
-		// TODO Auto-generated method stub
-		
+		SharedPreferences.Editor prefEditor = prefs.edit();
+		prefEditor.putBoolean("ab", false);
+		prefEditor.commit();
 	}
 	
 }

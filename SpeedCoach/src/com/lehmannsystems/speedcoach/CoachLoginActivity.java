@@ -48,7 +48,7 @@ public class CoachLoginActivity extends Activity {
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
 	private UserLoginTask mAuthTask = null;
-	
+
 	// Values for email and password at the time of the login attempt.
 	private String mName;
 	private String mTeam;
@@ -63,7 +63,7 @@ public class CoachLoginActivity extends Activity {
 	String cTeamId;
 	List<String> teamNames;
 	HashMap<String, Integer> teamNamesWithId;
-	
+
 	SharedPreferences prefs;
 
 	@Override
@@ -71,7 +71,7 @@ public class CoachLoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_coach_login);
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(CoachLoginActivity.this);
 
 		// Set up the login form.
@@ -81,17 +81,17 @@ public class CoachLoginActivity extends Activity {
 
 		mTeamView = (AutoCompleteTextView) findViewById(R.id.actvCoxTeam);
 		mTeamView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView textView, int id,
-							KeyEvent keyEvent) {
-						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
-							return true;
-						}
-						return false;
-					}
-				});
+		.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int id,
+					KeyEvent keyEvent) {
+				if (id == R.id.login || id == EditorInfo.IME_NULL) {
+					attemptLogin();
+					return true;
+				}
+				return false;
+			}
+		});
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
@@ -189,25 +189,25 @@ public class CoachLoginActivity extends Activity {
 
 			mLoginStatusView.setVisibility(View.VISIBLE);
 			mLoginStatusView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 1 : 0)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginStatusView.setVisibility(show ? View.VISIBLE
-									: View.GONE);
-						}
-					});
+			.alpha(show ? 1 : 0)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginStatusView.setVisibility(show ? View.VISIBLE
+							: View.GONE);
+				}
+			});
 
 			mLoginFormView.setVisibility(View.VISIBLE);
 			mLoginFormView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 0 : 1)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginFormView.setVisibility(show ? View.GONE
-									: View.VISIBLE);
-						}
-					});
+			.alpha(show ? 0 : 1)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginFormView.setVisibility(show ? View.GONE
+							: View.VISIBLE);
+				}
+			});
 		} else {
 			// The ViewPropertyAnimator APIs are not available, so simply show
 			// and hide the relevant UI components.
@@ -308,14 +308,26 @@ public class CoachLoginActivity extends Activity {
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
+			boolean ab = prefs.getBoolean("ab", Boolean.FALSE);
 			if (success) {
-				SharedPreferences.Editor prefEditor = prefs.edit();
-				prefEditor.putString("coxName", mName);
-				prefEditor.putInt("coxTeam", Integer.valueOf(cTeamId));
-				prefEditor.commit();
-				Intent intent = new Intent(CoachLoginActivity.this, CoachActivity.class);
-				startActivity(intent);
-				finish();
+				if (ab) {
+					SharedPreferences.Editor prefEditor = prefs.edit();
+					prefEditor.putString("coxAName", mName);
+					prefEditor.putInt("coxATeam", Integer.valueOf(cTeamId));
+					prefEditor.commit();
+					Intent intent = new Intent(CoachLoginActivity.this, CoachActivity.class);
+					startActivity(intent);
+					finish();
+				}
+				else {
+					SharedPreferences.Editor prefEditor = prefs.edit();
+					prefEditor.putString("coxBName", mName);
+					prefEditor.putInt("coxBTeam", Integer.valueOf(cTeamId));
+					prefEditor.commit();
+					Intent intent = new Intent(CoachLoginActivity.this, CoachActivity.class);
+					startActivity(intent);
+					finish();
+				}
 			} else {
 				mTeamView.setError(getString(R.string.dummy_content));
 				mTeamView.requestFocus();
