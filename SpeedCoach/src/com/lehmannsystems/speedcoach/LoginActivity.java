@@ -1,9 +1,22 @@
 package com.lehmannsystems.speedcoach;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.lehmannsystems.speedcoach.CoxSignupActivity.getTeamNames;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +25,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +57,9 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 
+	List<String> teamNames;
+	HashMap<String, Integer> teamNamesWithId;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,6 +96,10 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+		teamNames = new ArrayList<String>();
+		
+		new getTeamNames().execute((Void) null);
 	}
 
 	@Override
@@ -185,11 +206,59 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
+	
+	private void add() {
+		// TODO Auto-generated method stub
+		ArrayAdapter<String> adp = new ArrayAdapter<String>(getBaseContext(),
+		android.R.layout.simple_dropdown_item_1line,teamNames);
+		adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+		mTeamView.setThreshold(1);
+		mTeamView.setAdapter(adp);
+		}
+	
+	public class getTeamNames extends AsyncTask<Void, Void, Boolean> {
+		protected ProgressDialog pDialog;
+		@Override
+	    protected void onPreExecute() {
+			pDialog = new ProgressDialog(LoginActivity.this);
+	        pDialog.setMessage("Please wait..");
+	        pDialog.setIndeterminate(true);
+	        pDialog.setCancelable(false);
+	        pDialog.show();
+	    };
 
-	/**
-	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
-	 */
+	    @Override
+	    protected Boolean doInBackground(Void... params) {
+	    	try {
+				URL db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
+				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
+				String inputLine = in.readLine();
+				JSONArray json = new JSONArray(inputLine); //.substring(1, inputLine.length()-1)
+				for (int i = 0; i < json.length(); i++) {
+					JSONObject jo = json.getJSONObject(i);
+					String n = jo.getString("name");
+					String joId = jo.getString("id");
+					
+					teamNamesWithId.put(n, Integer.valueOf(joId));
+					teamNames.add(n);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+
+	        return true;
+
+	    }
+
+	    @Override
+	    protected void onPostExecute(final Boolean ss) {
+	        // TODO Auto-generated method stub
+	        add();
+	        pDialog.dismiss();
+	    }
+	}
+	
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {

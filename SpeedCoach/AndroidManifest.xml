@@ -52,6 +52,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lehmannsystems.speedcoach.WhoAreYouActivity" />
         </activity>
+        <activity
+            android:name="com.lehmannsystems.speedcoach.LoginActivity"
+            android:label="@string/title_activity_cox_signup"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
     </application>
 
 </manifest>
