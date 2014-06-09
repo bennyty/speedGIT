@@ -104,7 +104,7 @@ public class CoxSignupActivity extends Activity {
 		}*/
 		
 		
-		mTeamView = (AutoCompleteTextView) findViewById(R.id.etCoxTeam);
+		mTeamView = (AutoCompleteTextView) findViewById(R.id.actvCoxTeam);
 		mTeamView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line));
 		/*mTeamView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
