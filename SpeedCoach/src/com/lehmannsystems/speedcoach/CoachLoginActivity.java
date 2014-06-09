@@ -18,9 +18,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -58,14 +60,19 @@ public class CoachLoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 
+	String cTeamId;
 	List<String> teamNames;
 	HashMap<String, Integer> teamNamesWithId;
+	
+	SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_coach_login);
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(CoachLoginActivity.this);
 
 		// Set up the login form.
 		mName = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -302,8 +309,11 @@ public class CoachLoginActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 			if (success) {
-				Intent intent = new Intent(CoachLoginActivity.this,
-						CoachActivity.class);
+				SharedPreferences.Editor prefEditor = prefs.edit();
+				prefEditor.putString("coxName", mName);
+				prefEditor.putInt("coxTeam", Integer.valueOf(cTeamId));
+				prefEditor.commit();
+				Intent intent = new Intent(CoachLoginActivity.this, CoachActivity.class);
 				startActivity(intent);
 				finish();
 			} else {
