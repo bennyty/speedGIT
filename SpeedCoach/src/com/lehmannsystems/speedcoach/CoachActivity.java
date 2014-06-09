@@ -214,7 +214,7 @@ public class CoachActivity extends ActionBarActivity {
 	            addBoatB();
 	            return true;
 	        case R.id.change_view:
-	        	intent = new Intent(this, MainActivity.class);
+	        	intent = new Intent(this, WhoAreYouActivity.class);
 				startActivity(intent);
 	            return true;
 	        default:
@@ -242,12 +242,16 @@ public class CoachActivity extends ActionBarActivity {
 		SharedPreferences.Editor prefEditor = prefs.edit();
 		prefEditor.putBoolean("ab", true);		
 		prefEditor.commit();
+		intent = new Intent(this, CoachLoginActivity.class);
+		startActivity(intent);
 	}
 
 	private void addBoatB() {
 		SharedPreferences.Editor prefEditor = prefs.edit();
 		prefEditor.putBoolean("ab", false);
 		prefEditor.commit();
+		intent = new Intent(this, CoachLoginActivity.class);
+		startActivity(intent);
 	}
 	
 }

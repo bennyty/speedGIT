@@ -48,7 +48,7 @@ public class WhoAreYouActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 	}
-	
+/*	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -78,7 +78,7 @@ public class WhoAreYouActivity extends ActionBarActivity {
 	    	}
 	    }
 	}
-
+*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
