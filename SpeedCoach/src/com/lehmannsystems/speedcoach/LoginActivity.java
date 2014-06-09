@@ -1,7 +1,9 @@
 package com.lehmannsystems.speedcoach;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,7 +62,7 @@ public class LoginActivity extends Activity {
 
 	List<String> teamNames;
 	HashMap<String, Integer> teamNamesWithId;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,17 +76,17 @@ public class LoginActivity extends Activity {
 
 		mTeamView = (AutoCompleteTextView) findViewById(R.id.actvCoxTeam);
 		mTeamView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView textView, int id,
-							KeyEvent keyEvent) {
-						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
-							return true;
-						}
-						return false;
-					}
-				});
+		.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int id,
+					KeyEvent keyEvent) {
+				if (id == R.id.login || id == EditorInfo.IME_NULL) {
+					attemptLogin();
+					return true;
+				}
+				return false;
+			}
+		});
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
@@ -96,10 +99,10 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
-		
+
 		teamNames = new ArrayList<String>();
 		teamNamesWithId = new HashMap<String, Integer>();
-		
+
 		new getTeamNames().execute((Void) null);
 	}
 
@@ -136,22 +139,22 @@ public class LoginActivity extends Activity {
 			mTeamView.setError(getString(R.string.error_field_required));
 			focusView = mTeamView;
 			cancel = true;
-		} /*else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
-		}*/
+		} /*
+		 * else if (mPassword.length() < 4) {
+		 * mPasswordView.setError(getString(R.string.error_invalid_password));
+		 * focusView = mPasswordView; cancel = true; }
+		 */
 
 		// Check for a valid email address.
 		if (TextUtils.isEmpty(mName)) {
 			mNameView.setError(getString(R.string.error_field_required));
 			focusView = mNameView;
 			cancel = true;
-		} /*else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
-			cancel = true;
-		}*/
+		} /*
+		 * else if (!mEmail.contains("@")) {
+		 * mEmailView.setError(getString(R.string.error_invalid_email));
+		 * focusView = mEmailView; cancel = true; }
+		 */
 
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
@@ -181,25 +184,25 @@ public class LoginActivity extends Activity {
 
 			mLoginStatusView.setVisibility(View.VISIBLE);
 			mLoginStatusView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 1 : 0)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginStatusView.setVisibility(show ? View.VISIBLE
-									: View.GONE);
-						}
-					});
+			.alpha(show ? 1 : 0)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginStatusView.setVisibility(show ? View.VISIBLE
+							: View.GONE);
+				}
+			});
 
 			mLoginFormView.setVisibility(View.VISIBLE);
 			mLoginFormView.animate().setDuration(shortAnimTime)
-					.alpha(show ? 0 : 1)
-					.setListener(new AnimatorListenerAdapter() {
-						@Override
-						public void onAnimationEnd(Animator animation) {
-							mLoginFormView.setVisibility(show ? View.GONE
-									: View.VISIBLE);
-						}
-					});
+			.alpha(show ? 0 : 1)
+			.setListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					mLoginFormView.setVisibility(show ? View.GONE
+							: View.VISIBLE);
+				}
+			});
 		} else {
 			// The ViewPropertyAnimator APIs are not available, so simply show
 			// and hide the relevant UI components.
@@ -207,40 +210,44 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-	
+
 	private void add() {
 		// TODO Auto-generated method stub
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(getBaseContext(),
-		android.R.layout.simple_dropdown_item_1line,teamNames);
+				android.R.layout.simple_dropdown_item_1line, teamNames);
 		adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		mTeamView.setThreshold(1);
 		mTeamView.setAdapter(adp);
-		}
-	
+	}
+
 	public class getTeamNames extends AsyncTask<Void, Void, Boolean> {
 		protected ProgressDialog pDialog;
-		@Override
-	    protected void onPreExecute() {
-			pDialog = new ProgressDialog(LoginActivity.this);
-	        pDialog.setMessage("Please wait..");
-	        pDialog.setIndeterminate(true);
-	        pDialog.setCancelable(false);
-	        pDialog.show();
-	    };
 
-	    @Override
-	    protected Boolean doInBackground(Void... params) {
-	    	try {
-				URL db = new URL("http://getgreenrain.com/RowSplit/getTeamList.php");
-				BufferedReader in = new BufferedReader(new InputStreamReader(db.openStream()));
+		@Override
+		protected void onPreExecute() {
+			pDialog = new ProgressDialog(LoginActivity.this);
+			pDialog.setMessage("Please wait..");
+			pDialog.setIndeterminate(true);
+			pDialog.setCancelable(false);
+			pDialog.show();
+		};
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			try {
+				URL db = new URL(
+						"http://getgreenrain.com/RowSplit/getTeamList.php");
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						db.openStream()));
 				String inputLine = in.readLine();
-				JSONArray json = new JSONArray(inputLine); //.substring(1, inputLine.length()-1)
+				JSONArray json = new JSONArray(inputLine); // .substring(1,
+				// inputLine.length()-1)
 				in.close();
 				for (int i = 0; i < json.length(); i++) {
 					JSONObject jo = json.getJSONObject(i);
 					String n = jo.getString("name");
 					String joId = jo.getString("id");
-					
+
 					teamNamesWithId.put(n, Integer.valueOf(joId));
 					teamNames.add(n);
 				}
@@ -249,31 +256,46 @@ public class LoginActivity extends Activity {
 				return false;
 			}
 
-	        return true;
+			return true;
 
-	    }
+		}
 
-	    @Override
-	    protected void onPostExecute(final Boolean ss) {
-	        // TODO Auto-generated method stub
-	        add();
-	        pDialog.dismiss();
-	    }
+		@Override
+		protected void onPostExecute(final Boolean ss) {
+			// TODO Auto-generated method stub
+			add();
+			pDialog.dismiss();
+		}
 	}
-	
+
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
+			String cTeamId = null;
+			for (String key : teamNamesWithId.keySet()) {
+				if (mTeam.equals(key)) {
+					cTeamId = teamNamesWithId.get(key).toString();
+				}
+			}
 
+			URL db;
+			BufferedReader in;
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+				// Network access
+				db = new URL(
+						"http://getgreenrain.com/RowSplit/insertCoxin.php?tid="
+								+ cTeamId + "&name=" + mName);
+				in = new BufferedReader(new InputStreamReader(db.openStream()));
+				in.readLine();
+				in.close();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				return false;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				return false;
 			}
 
-			// TODO: register the new account here.
 			return true;
 		}
 
@@ -281,8 +303,10 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
-
 			if (success) {
+				Intent intent = new Intent(LoginActivity.this,
+						CoxActivity.class);
+				startActivity(intent);
 				finish();
 			} else {
 				mTeamView.setError(getString(R.string.dummy_content));
