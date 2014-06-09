@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +47,36 @@ public class WhoAreYouActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Intent intent;
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		
+	    boolean previouslyStarted = prefs.getBoolean("setup", Boolean.FALSE);
+	    Log.v(getLocalClassName(), String.valueOf(previouslyStarted));
+	    if(!previouslyStarted){
+		    intent = new Intent(this, WhoAreYouActivity.class);
+		    startActivity(intent);
+		    //Log.d(getLocalClassName(), "This has Not been previously started");
+	    } else {
+	    	//Log.d(getLocalClassName(), "This has been previously started");
+	    	switch (prefs.getInt("type", 0)) {
+		    	//0 - Coach
+				//1 - Cox
+				//2 - Viewer
+	    		case (0):
+	    			intent = new Intent(this, CoachActivity.class);
+					startActivity(intent);
+	    		break;
+	    		case (1):
+	    			intent = new Intent(this, CoxActivity.class);
+					startActivity(intent);
+				break;
+	    	}
+	    }
 	}
 
 	@Override

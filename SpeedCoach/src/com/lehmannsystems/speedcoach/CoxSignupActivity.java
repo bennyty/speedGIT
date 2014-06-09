@@ -18,9 +18,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -302,8 +304,11 @@ public class CoxSignupActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 			if (success) {
-				Intent intent = new Intent(CoxSignupActivity.this,
-						CoxActivity.class);
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(CoxSignupActivity.this);
+				SharedPreferences.Editor prefEditor = prefs.edit();
+				prefEditor.putString("coxName", mName);
+				prefEditor.commit();
+				Intent intent = new Intent(CoxSignupActivity.this, CoxActivity.class);
 				startActivity(intent);
 				finish();
 			} else {
